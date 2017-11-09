@@ -1,0 +1,5 @@
+Feature: ChooseLevel
+	As a user
+	I want to choose a category and a level of the choosen category
+	
+#	Scenario: SignUp successful
