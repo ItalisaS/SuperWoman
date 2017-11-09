@@ -78,7 +78,6 @@ public class TestFrame extends JPanel implements Runnable, KeyListener
 
 	private void jump()
 	{
-
 		// Schrittweises Springen oder Fallen
 		if (isJumping)
 		{
