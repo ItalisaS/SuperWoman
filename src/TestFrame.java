@@ -2,6 +2,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -42,21 +43,17 @@ public class TestFrame extends JPanel implements Runnable, KeyListener
 		widthImg = 800;
 
 		// Hintergrundbild
-		ImageIcon u = new ImageIcon("D:/DHBW/3. Semester/Software Engineering/superwoman2_preview.png");
+		URL backgroundImg = TestFrame.class.getResource("/img/Background.png");
+		ImageIcon u = new ImageIcon(backgroundImg);
 		bgImage = u.getImage();
 
 		// Spielfigur
-		ImageIcon s = new ImageIcon("D:/DHBW/3. Semester/Software Engineering/character.png");
+		URL characterImg = TestFrame.class.getResource("/img/character.png");
+		ImageIcon s = new ImageIcon(characterImg);
 		avatar = s.getImage();
 
 		thread = new Thread(this);
 		thread.start();
-	}
-
-
-	public int getX_img()
-	{
-		return x_img;
 	}
 
 
@@ -66,6 +63,7 @@ public class TestFrame extends JPanel implements Runnable, KeyListener
 		while (true)
 		{
 			move();
+			jump();
 			try
 			{
 				Thread.sleep(10);
@@ -75,30 +73,11 @@ public class TestFrame extends JPanel implements Runnable, KeyListener
 			}
 			repaint();
 		}
-
 	}
 
 
-	public void move()
+	private void jump()
 	{
-		// Spielfigur bewegen
-		// läuft nicht/nach rechts
-		if (motionImg != -3)
-		{
-			if ((left + motionImg) <= 150)
-			{
-				left += motionImg;
-			} else
-			{
-				x_img -= motionImg;
-			}
-		} else
-		{
-			if ((left + motionImg) > 0)
-			{
-				left += motionImg;
-			}
-		}
 
 		// Schrittweises Springen oder Fallen
 		if (isJumping)
@@ -134,6 +113,29 @@ public class TestFrame extends JPanel implements Runnable, KeyListener
 				isJumping = false;
 				isFalling = true;
 
+			}
+		}
+	}
+
+
+	public void move()
+	{
+		// Spielfigur bewegen
+		// läuft nicht/nach rechts
+		if (motionImg != -3)
+		{
+			if ((left + motionImg) <= 150)
+			{
+				left += motionImg;
+			} else
+			{
+				x_img -= motionImg;
+			}
+		} else
+		{
+			if ((left + motionImg) > 0)
+			{
+				left += motionImg;
 			}
 		}
 	}
