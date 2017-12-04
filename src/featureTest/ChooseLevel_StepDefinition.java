@@ -33,8 +33,6 @@ public class ChooseLevel_StepDefinition
 	public void User_is_on_ChooseLevel_page() throws Throwable {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get("file:///C:/Users/Lea/git/SuperWoman/src/website/categoryLevels.html");
-//		String text = driver.findElement(By.id("StartPage")).getText();
-//		System.out.println(text);
 	}
 
 	@When("^User clicks on a category$")
@@ -72,19 +70,29 @@ public class ChooseLevel_StepDefinition
 
 	@When("^User chooses a level which is locked$")
 	public void User_chooses_a_level_which_is_locked() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+		driver.findElement(By.id("Item")).click();
+		driver.findElement(By.id("Lock")).click();
 	}
 
 	@Then("^User get shown an error message$")
 	public void User_get_shown_an_error_message() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+		String url = driver.getCurrentUrl();
+		if(url.equals("file:///C:/Users/Lea/git/SuperWoman/src/website/couldntLoadLevel.html")){
+			System.out.println("Locked Level couldn't load");
+		}
+		else {
+			System.out.println("Locked Level load");
+		}
 	}
 
 	@Then("^Should choose a new level$")
 	public void Should_choose_a_new_level() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+		String url = driver.getCurrentUrl();
+		if(url.equals("file:///C:/Users/Lea/git/SuperWoman/src/website/categoryLevels.html")){
+			System.out.println("User can choose new Level");
+		}
+		else {
+			System.out.println("User can not choose new Level");
+		}
 	}
 }
