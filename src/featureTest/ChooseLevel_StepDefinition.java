@@ -39,7 +39,7 @@ public class ChooseLevel_StepDefinition
 	public void User_is_on_ChooseLevel_page() throws Throwable
 	{
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get("file:///C:/Users/Lea/git/SuperWoman/src/website/categoryLevels.html");
+		driver.get("file:///C:/Users/Lea/git/SuperWoman/WebContent/Website/categoryLevels.html");
 	}
 
 
@@ -61,7 +61,7 @@ public class ChooseLevel_StepDefinition
 	public void The_level_opens() throws Throwable
 	{
 		String url = driver.getCurrentUrl();
-		assertEquals("file:///C:/Users/Lea/git/SuperWoman/src/website/playGame.html", url);
+		assertEquals("file:///C:/Users/Lea/git/SuperWoman/WebContent/Website/playGame.html", url);
 	}
 
 
@@ -87,7 +87,7 @@ public class ChooseLevel_StepDefinition
 	public void User_get_shown_an_error_message() throws Throwable
 	{
 		String url = driver.getCurrentUrl();
-		assertEquals("file:///C:/Users/Lea/git/SuperWoman/src/website/couldntLoadLevel.html", url);
+		assertEquals("file:///C:/Users/Lea/git/SuperWoman/WebContent/Website/couldntLoadLevel.html", url);
 	}
 
 
@@ -96,6 +96,6 @@ public class ChooseLevel_StepDefinition
 	{
 		driver.findElement(By.id("OKNotLoadLevel")).click();
 		String url = driver.getCurrentUrl();
-		assertEquals("file:///C:/Users/Lea/git/SuperWoman/src/website/categoryLevels.html?", url);
+		assertEquals("file:///C:/Users/Lea/git/SuperWoman/WebContent/Website/categoryLevels.html?", url);
 	}
 }
