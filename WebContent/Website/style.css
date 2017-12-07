@@ -47,7 +47,7 @@ nav>.container>ul>li {
   padding: 0;
   top: 45px;
   left: 0px;
-  background-color: #e6e6e6;
+  background-color: #c404b0;
   color: #262626;
   opacity: 0;
   transition: all 0.1s linear;
@@ -89,7 +89,7 @@ nav>.container>ul>li>div, nav>.container>ul>li>a {
 }
 
 nav>.container>ul>li>div:hover, nav>.container>ul>li>a:hover {
-  background-color: #e6e6e6;
+  background-color: #c404b0;
   color: #262626;
 }
 
