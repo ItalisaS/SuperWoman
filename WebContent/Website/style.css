@@ -5,8 +5,8 @@ html, body {
 }
 
 .header {
-  background-image: url("./logoKlein.png");
-  background-size: 20%;
+  background-image: url("../img/logo.PNG");
+  background-size: 12%;
   background-repeat: repeat;
   height: 150px;
   line-height: 150px;
