@@ -22,7 +22,7 @@ Feature: SignUp
 		Given Visitor is on SignUp page
 		When Visitor did not fill in all required elements
 		Then Visitor did not create an account
-		And Visitor should be shown an error message
+		And Visitor should not be shown the next page
 		
 		
 		

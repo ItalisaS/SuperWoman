@@ -3,12 +3,10 @@ package featureTest;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.internal.runners.statements.Fail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import com.sun.source.tree.AssertTree;
+import static org.junit.Assert.*;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
@@ -52,29 +50,19 @@ public class SignUp_StepDefinition
 		driver.findElement(By.id("Name")).sendKeys("Name");
 		driver.findElement(By.id("Email")).sendKeys("Email");
 		driver.findElement(By.id("Password")).sendKeys("Password");
-		
-		if (checkInput())
-		{
-			System.out.println("Input Data correct");
-		} else
-		{
-			System.out.println("Input Data False");
-		}
+
+		assertTrue(checkInput());
 	}
 
 
 	private Boolean checkInput()
 	{
 
-		if (driver.findElement(By.id("Name")).getText() != null
-				|| !(driver.findElement(By.id("Name")).getText().equals("")))
+		if (!(driver.findElement(By.id("Name")).getAttribute("value").equals("")))
 		{
-			System.out.println(driver.findElement(By.id("Name")).getText());
-			if (driver.findElement(By.id("Email")).getText() != null
-					|| !(driver.findElement(By.id("Email")).getText().equals("")))
+			if (!(driver.findElement(By.id("Email")).getAttribute("value").equals("")))
 			{
-				if (driver.findElement(By.id("Password")).getText() != null
-						|| !(driver.findElement(By.id("Password")).getText().equals("")))
+				if (!(driver.findElement(By.id("Password")).getAttribute("value").equals("")))
 				{
 					return true;
 				}
@@ -106,13 +94,7 @@ public class SignUp_StepDefinition
 	public void Visitor_should_be_shown_a_success_message() throws Throwable
 	{
 		String url = driver.getCurrentUrl();
-		if (url.equals("file:///C:/Users/Lea/git/SuperWoman/src/website/accountCreated.html"))
-		{
-			System.out.println("Account created successful");	
-		} else
-		{
-			System.out.println("Couldn't create the Account");
-		}
+		assertEquals("file:///C:/Users/Lea/git/SuperWoman/src/website/accountCreated.html", url);
 	}
 
 
@@ -129,19 +111,20 @@ public class SignUp_StepDefinition
 	{
 		driver.findElement(By.id("Save")).click();
 	}
+	
+	
+	@Then("^Visitor should not be shown the next page$")
+	public void Visitor_should_not_be_shown_the_next_page() throws Throwable {
+		String url = driver.getCurrentUrl();
+		assertEquals("file:///C:/Users/Lea/git/SuperWoman/src/website/signUp.html", url);
+	}
 
 
 	@Then("^Visitor should be shown an error message$")
 	public void Visitor_should_be_shown_an_error_message() throws Throwable
 	{
 		String url = driver.getCurrentUrl();
-		if (url.equals("file:///C:/Users/Lea/git/SuperWoman/src/website/accountCreatedFail.html"))
-		{
-			System.out.println("Account created fail");	
-		} else
-		{
-			System.out.println("Create false Account");
-		}
+		assertEquals("file:///C:/Users/Lea/git/SuperWoman/src/website/accountCreatedFail.html", url);
 	}
 
 
@@ -151,13 +134,7 @@ public class SignUp_StepDefinition
 		driver.findElement(By.id("Name")).sendKeys("");
 		driver.findElement(By.id("Email")).sendKeys("");
 		driver.findElement(By.id("Password")).sendKeys("");
-
-		if (checkInput())
-		{
-			System.out.println("Input Data correct");
-		} else
-		{
-			System.out.println("Input Data False");
-		}
+		
+		assertFalse(checkInput());
 	}
 }
