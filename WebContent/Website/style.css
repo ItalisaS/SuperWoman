@@ -5,19 +5,20 @@ html, body {
 }
 
 .header {
-  background-image: url("../img/logo.PNG");
-  background-size: 12%;
-  background-repeat: repeat;
+  background-image: url("../img/logo.png");
+  background-position: right;
+  background-color:	#ffe8ff ;
+  background-repeat: no-repeat;
+  background-size: 20%;
   height: 150px;
   line-height: 150px;
   width: 100%;
 }
 
 .header>h1 {
-  font-family: 'Segoe UI Light';
+  font-family: 'Brush Script MT';
   font-weight: 900;
-  font-size: 80px;
-  font-style: bold;
+  font-size: 100px;
   margin: 0;
   text-align: center;
 }
