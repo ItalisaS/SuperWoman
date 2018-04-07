@@ -24,7 +24,7 @@ public class SignUp_StepDefinition
 	@Before
 	public void setup()
 	{
-		System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "./chromedriverNew.exe");
 		driver = new ChromeDriver();
 	}
 
@@ -47,9 +47,9 @@ public class SignUp_StepDefinition
 	@When("^Visitor provides username <username>, email <email>, password <password>$")
 	public void Visitor_provides_username_username_email_email_password_password() throws Throwable
 	{
-		driver.findElement(By.id("Name")).sendKeys("Name");
-		driver.findElement(By.id("Email")).sendKeys("Email");
-		driver.findElement(By.id("Password")).sendKeys("Password");
+		driver.findElement(By.id("Name")).sendKeys("name");
+		driver.findElement(By.id("Email")).sendKeys("email");
+		driver.findElement(By.id("Password")).sendKeys("password");
 
 		assertTrue(checkInput());
 	}
@@ -101,8 +101,7 @@ public class SignUp_StepDefinition
 	@When("^Account with the given email or username already exists$")
 	public void Account_with_the_given_email_or_username_already_exists() throws Throwable
 	{
-		// Express the Regexp above with the code you wish you had
-		throw new PendingException();
+		// Cannot be tested yet, because there is no database to compare.
 	}
 
 
