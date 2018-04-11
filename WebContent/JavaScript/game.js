@@ -51,11 +51,11 @@ import SpriteSheet from './spriteSheet.js';
 
 		function jump() {
 			if (isJumping) {
-				move(0, -i * 0.05);
+				move(0, -i * 0.07);
 				i--;
 			}
 			else if (isFalling) {
-				move(0, i * 0.05);
+				move(0, i * 0.08);
 				i++;
 			}
 
