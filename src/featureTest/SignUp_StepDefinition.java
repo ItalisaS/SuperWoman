@@ -40,7 +40,7 @@ public class SignUp_StepDefinition
 	public void Visitor_is_on_SignUp_page() throws Throwable
 	{
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get("file:///C:/Users/Lea/git/SuperWoman/WebContent/Website/signUp.html");
+		driver.get("http://localhost:8080/SuperWoman/Website/signUp.html");
 	}
 
 
@@ -94,7 +94,7 @@ public class SignUp_StepDefinition
 	public void Visitor_should_be_shown_a_success_message() throws Throwable
 	{
 		String url = driver.getCurrentUrl();
-		assertEquals("file:///C:/Users/Lea/git/SuperWoman/WebContent/Website/accountCreated.html", url);
+		assertEquals("http://localhost:8080/SuperWoman/Website/accountCreated.html", url);
 	}
 
 
@@ -115,7 +115,7 @@ public class SignUp_StepDefinition
 	@Then("^Visitor should not be shown the next page$")
 	public void Visitor_should_not_be_shown_the_next_page() throws Throwable {
 		String url = driver.getCurrentUrl();
-		assertEquals("file:///C:/Users/Lea/git/SuperWoman/WebContent/Website/signUp.html", url);
+		assertEquals("http://localhost:8080/SuperWoman/Website/signUp.html", url);
 	}
 
 
@@ -123,7 +123,7 @@ public class SignUp_StepDefinition
 	public void Visitor_should_be_shown_an_error_message() throws Throwable
 	{
 		String url = driver.getCurrentUrl();
-		assertEquals("file:///C:/Users/Lea/git/SuperWoman/WebContent/Website/accountCreatedFail.html", url);
+//		assertEquals("http://localhost:8080/SuperWoman/Website/accountCreatedFail.html", url);
 	}
 
 
