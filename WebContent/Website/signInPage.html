@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link href="style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
 <title>Sign In</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
@@ -27,16 +27,16 @@
 						</ul>
 					</div>
 				</li>
-				<li><a href="signInPage.html">LogIn</a></li>
-				<li><a href="signUp.html">SignUp</a></li>
+				<li><a href="../Webapp/login.jsp">LogIn</a></li>
+				<li><a href="../Webapp/signUp.jsp">SignUp</a></li>
 			</ul>
 		</div>
 	</nav>
-	<form action="">
+	<form action="j_spring_security_check">
 		<h2>Sign In</h2>
-		<label>User Name:</label><br> <input type="text" name="uname"
+		<label>User Name:</label><br> <input type="text" name="<%=UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY%>"
 			placeholder="Enter Username" ng-model="username"><br> <label>Password:</label><br>
-		<input type="password" name="psw" placeholder="Enter Password"
+		<input type="password" name="<%=UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY%>" placeholder="Enter Password"
 			ng-model="password"><br>
 		<button ng-click="welcomeUser()">SIGN IN</button>
 		</br> <a href="">Forgot Password?</a>
