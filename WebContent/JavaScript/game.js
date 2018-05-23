@@ -1,41 +1,114 @@
 
 import KeyboardState from './keyboardState.js';
 import SpriteSheet from './spriteSheet.js';
+import {loadImage, loadLevel} from './loaders.js';
 
+const canvas = document.getElementById('screen');
+const context = canvas.getContext('2d');
+// context.fillRect(0,0,500,500);
 
-		function loadImage(url) {
-			return new Promise(resolve => {
-				const image = new Image();
-				image.addEventListener('load', () => {
-					resolve(image);
-				});
-				image.src = url;
-			});
-		}
-
-
+	var pos = {
+		x: 40,
+		y: 399,
+	};
+	
+	var posBackground = {
+		x: 0,
+		y: 0,
+	};
+	
+	var firstLoop = true;	
+	var posPath = new Array();
+	var posGap = new Array();
+	var posBrick = new Array();
+	
 		function loadcity() {
 			return loadImage('img/city.PNG')
 				.then(image => {
 					const sprites = new SpriteSheet(image, 800, 471);
 					sprites.define('city', 0, 0);
-					sprites.draw('city', context, 0, 0);
+					for(let x = 0; x < 15; ++x) {
+						sprites.draw('city', context, posBackground.x + x* sprites.width, posBackground.y);
+					}
+				});
+		}
+		
+		function drawGameover() {
+			return loadImage('img/gameOver.png')
+				.then(image => {
+					const sprites = new SpriteSheet(image, 800, 471);
+					sprites.define('gameOver', 0, 0);
+					sprites.draw('gameOver', context, 1,0);
+				});
+		}
+		
+		function loadBricks() {
+			return loadImage('img/Brick.PNG')
+				.then(image => {
+					const sprites = new SpriteSheet(image, 50, 50);
+					sprites.define('brick', 0, 0);
+					loadLevel('level1')
+					.then(level => {
+						for(let x = 0; x < 5; ++x) {
+							if (firstLoop) {
+								posBrick.push(level.backgrounds[0].positionBrick[x]);
+							}
+							sprites.draw('brick', context, posBrick[x], 200)
+						}
+					})
 				});
 		}
 
 
 		function loadGround() {
-			return loadImage('img/weg.PNG')
+			return loadImage('img/path.PNG')
 				.then(image => {
-					const sprites = new SpriteSheet(image, 66, 97)
-					sprites.define('ground', 0, 0)
-					for (let x = 0; x < 14; ++x) {
-						sprites.draw('ground', context, x * 66, 471);
-					}
+					const sprites = new SpriteSheet(image, 147, 113)
+					sprites.define('ground', 0, 0);
+					
+					loadLevel('level1')
+					.then(level => {
+						// console.log(level);
+						drawPath(level.backgrounds[0], context, sprites);
+					})
 				});
 		}
 
-
+		function drawPath(background, context, sprites) {
+			background.ranges.forEach(([x1,x2,y1,y2]) => {
+				for(let x = x1; x < x2; ++x) {
+					if(firstLoop == true) {
+						// posPath.push(x*background.distance[x]);
+						if(-(background.distance[x] - 1 ))
+							posPath.push(x);
+					}
+					sprites.drawTile(background.ground, context, posPath[x] , 471);
+				}
+			});
+		}
+		
+		function drawGap() {
+			return loadImage('img/gap2.png')
+			.then(image => {
+				
+				const sprites = new SpriteSheet(image, 147, 113);
+				sprites.define('gap', 0, 0);
+				
+					if(firstLoop == true) { 
+						loadLevel('level1')
+						.then(level => {
+							for(let x = 0; x < 70; ++x) {
+								if (level.backgrounds[0].distance[x])
+									posGap.push(x);
+							}
+						})
+					}
+				for(let x = 0; x < 70; ++x) {
+					sprites.drawTile('gap', context, posGap[x], 471);
+				}
+			});
+		}
+		
 		function loadFigur() {
 			return loadImage('img/superwomanavatar2.png')
 				.then(image => {
@@ -76,47 +149,79 @@ import SpriteSheet from './spriteSheet.js';
 				if (i == 0 && (isFalling || isJumping)) {
 					isJumping = false;
 					isFalling = true;
-
 				}
 			}
 		}
 
 		function update() {
-			console.log("update");
+			drawGap();
 			loadcity();
 			loadGround();
-
+			// loadBricks();
 			if (input.keyStates.get(RIGHTARROW)) {
-				move(2, 0);
+				if(pos.x > 330) {
+					posBackground.x -= 2.7;
+					firstLoop = false;
+					for(let x = 0; x < posPath.length; ++x) {
+							posPath[x] = posPath[x] -0.018;
+					}
+					for(let x = 0; x < posGap.length; ++x) {
+						posGap[x] = posGap[x] -0.018;
+						checkGameOver();
+					}
+					for(let x = 0; x < posBrick.length; ++x) {
+						posBrick[x] = posBrick[x] -2.8;
+					}
+				}
+				else {
+					move(2.7, 0);
+				}
 			} else if (input.keyStates.get(LEFTARROW)) {
-				move(-2, 0);
+				checkGameOver();
+				move(-2.7, 0);
+			} else {
+				checkGameOver();
 			}
+			
 			if (input.keyStates.get(SPACE)) {
 				if (!isJumping && !isFalling) {
 					isJumping = true;
-					i = 80;
-					console.log('Jump');
+					i = 72;
 				}
 			}
 			jump();
 			loadFigur();
 
-
-			// setTimeout(loadFigur, 200, pos.x, pos.y);
-			// pos.y += 2;
-			// figure.draw('idle', context, pos.x, pos.y);
 			requestAnimationFrame(update);
+		}
+		
+		function checkGameOver() {
+			for(let x = 0; x < posGap.length; ++x) {
+				if(1.6<posGap[x] && posGap[x]<2.6 && pos.y == 399) {
+					stopGame();
+				}
+			}
 		}
 
 		function move(x, y) {
 			pos.x += x;
 			pos.y += y;
-
-			if(pos.x > 730)
+			
+			if(pos.x < -30)
 			{
+				pos.x = -30;
+			}
+			if(pos.x > 730) {
 				pos.x = 730;
 			}
 			
+		}
+		
+		function stopGame() {
+			pos.x = 33;
+			pos.y = 499;
+			drawGameover();
+			cancelAnimationFrame();
 		}
 
 		const LEFTARROW = 37;
@@ -127,19 +232,12 @@ import SpriteSheet from './spriteSheet.js';
 		input.addMapping(RIGHTARROW, keyState => { });
 		input.addMapping(SPACE, keyState => { });
 		input.listenTo(window);
-
-
-		const canvas = document.getElementById('screen');
-		const context = canvas.getContext('2d');
-		context.fillRect(0, 471, 800, 97);
-
-
-		var pos = {
-			x: 40,
-			y: 399,
-		};
-
+		
+		// load and draw images
+		drawGap();
 		loadcity();
-		loadGround();
+		setTimeout(loadGround, 200, pos.x, pos.y);
+		//loadBricks();
+		// setTimeout(loadBricks, 200, 150, 250);
 		setTimeout(loadFigur, 200, pos.x, pos.y);
 		update();
