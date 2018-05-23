@@ -20,7 +20,7 @@ export default class SpriteSheet {
 				context.drawImage(buffer, x, y);
 			}
 
-			//drawTiles(name, context, x, y){
-			//		this.draw(name,context, x*this.width )
-			//	}
+			drawTile(name, context, x, y){
+					this.draw(name,context, x*this.width, y)
+			}
 		}
