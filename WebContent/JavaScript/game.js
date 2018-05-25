@@ -1,7 +1,9 @@
 
 import KeyboardState from './keyboardState.js';
+import {ObserverList, Subject} from './observer.js';
 import SpriteSheet from './spriteSheet.js';
 import {loadImage, loadLevel} from './loaders.js';
+import {theSubject, init} from './pattern.js';
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
@@ -154,10 +156,10 @@ const context = canvas.getContext('2d');
 		}
 
 		function update() {
-			drawGap();
-			loadcity();
-			loadGround();
-			// loadBricks();
+			//drawGap();
+			//loadcity();
+			//loadGround();
+			
 			if (input.keyStates.get(RIGHTARROW)) {
 				if(pos.x > 330) {
 					posBackground.x -= 2.7;
@@ -223,6 +225,38 @@ const context = canvas.getContext('2d');
 			drawGameover();
 			cancelAnimationFrame();
 		}
+//
+//		function createObserver() {
+//			var theEventHandler = function (input.listenTo(window)){
+//				console.log("fired: " + input);
+//			};
+//		
+//			var subject = new theSubject();
+//		
+//			subject.addObserver(theEventHandler); //adds the given function in handler list
+//			subject.notify(drawGap()); //calls the function once.
+//			subject.notify(loadcity()); //notify doesn't call anything
+//			subject.notify(loadGround()); //calls it once with event 3
+//			subject.notify(update());
+//			subject.removeObserver(theEventHandler); //removes this function twice from the function list
+//		}
+
+	//	export function model(){
+	//		var self = this;
+	//		this.heading = "Hello";
+	//		//collection of observers 
+	//		  this.observers = []; 
+	//		//add to the collection of observers
+	//		this.registerObserver = function(observer){
+	//			self.observers.push(observer);
+	//		}
+	//		//Iterate over observers, calling their update method
+	//		this.notifyAll = function(){
+	 //			self.observers.forEach(function(observer){
+		//			observer.update(self);
+	//			  })
+	//		}
+	//	  }
 
 		const LEFTARROW = 37;
 		const RIGHTARROW = 39;
@@ -232,7 +266,16 @@ const context = canvas.getContext('2d');
 		input.addMapping(RIGHTARROW, keyState => { });
 		input.addMapping(SPACE, keyState => { });
 		input.listenTo(window);
-		
+
+		var theEventHandler = function(input){
+			console.log(input);
+		}
+		var observer = new Subject;
+		observer.addObserver(theEventHandler);
+		observer.notify(update);
+
+//		init();
+
 		// load and draw images
 		drawGap();
 		loadcity();
@@ -240,4 +283,59 @@ const context = canvas.getContext('2d');
 		//loadBricks();
 		// setTimeout(loadBricks, 200, 150, 250);
 		setTimeout(loadFigur, 200, pos.x, pos.y);
-		update();
+//		createObserver();
+		//update();
+
+
+
+//		// Extend an object with an extension
+//function extend( obj, extension ){
+//  for ( var key in extension ){
+//    obj[key] = extension[key];
+//  }
+//}
+// 
+//// References to our DOM elements
+// 
+//var controlCheckbox = document.getElementById( "mainCheckbox" ),
+//  addBtn = document.getElementById( "addNewObserver" ),
+//  container = document.getElementById( "observersContainer" );
+// 
+// 
+//// Concrete Subject
+// 
+//// Extend the controlling checkbox with the Subject class
+//extend( controlCheckbox, new Subject() );
+// 
+//// Clicking the checkbox will trigger notifications to its observers
+//controlCheckbox.onclick = function(){
+//  controlCheckbox.notify( controlCheckbox.checked );
+//};
+// 
+//addBtn.onclick = addNewObserver;
+// 
+//// Concrete Observer
+// 
+//function addNewObserver(){
+// 
+//  // Create a new checkbox to be added
+//  var check = document.createElement( "input" );
+//  check.type = "checkbox";
+// 
+//  // Extend the checkbox with the Observer class
+//  extend( check, new Observer() );
+// 
+//  // Override with custom update behaviour
+//  check.update = function( value ){
+//    this.checked = value;
+//  };
+// 
+//  // Add the new observer to our list of observers
+//  // for our main subject
+//  controlCheckbox.addObserver( check );
+// 
+//  // Append the item to the container
+//  container.appendChild( check );
+//}
+
+		
