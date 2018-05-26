@@ -1,4 +1,3 @@
-
 import KeyboardState from './keyboardState.js';
 import SpriteSheet from './spriteSheet.js';
 
