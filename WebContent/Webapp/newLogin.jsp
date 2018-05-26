@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"
-	import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Log in</title>
+</head>
+<body>
 <link href="../Website/css/style.css" rel="stylesheet">
 <title>Login</title>
 <script
@@ -32,22 +34,36 @@
 					</ul>
 				</div>
 			</li>
-			<li><a href="login.jsp">LogIn</a></li>
-			<li><a href="signUp.jsp">SignUp</a></li>
+			<li><a href="newLogin.jsp">LogIn</a></li>
+			<li><a href="../Website/signUp.html">SignUp</a></li>
 		</ul>
 	</div>
 	</nav>
-	<form name="f" method="post" action="/login">
+	<c:url value="/loginNew" var="loginUrl" />
+
+	<form action="${loginUrl}" method="post">
+
 		<h2>Sign In</h2>
-		<label>User Name:</label><br> <input id="username" type="text"
-			name="<%=UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY%>"
-			placeholder="Enter Username"><br> <label>Password:</label><br>
-		<input type="password"
-			name="<%=UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY%>"
-			placeholder="Enter Password"><br> </br> <a href="">Forgot
-			Password?</a>
-		<h2>New User</h2>
-		<button name="submit" type="submit">SIGN UP</button>
+		<%-- <c:if test="${param.error != null}">
+			<p>Invalid username and password.</p>
+		</c:if>
+		<c:if test="${param.logout != null}">
+			<p>You have been logged out.</p>
+		</c:if> --%>
+		<p>
+			<label for="username">Name</label> <br> <input type="text" id="username"
+				name="username" />
+		</p>
+		<p>
+			<label for="password">Password</label> <br> <input type="password"
+				id="password" name="password" />
+		</p>
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" /> 
+			<a href="">Forgot Password?</a>
+		<br>
+		<button type="submit" class="btn">Log in</button>
 	</form>
-	</br>
+
+</body>
 </html>

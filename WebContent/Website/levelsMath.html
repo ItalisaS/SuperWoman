@@ -5,65 +5,67 @@
 <link href="css/style.css" rel="stylesheet">
 <title>Level</title>
 <script type="text/javascript">
-function allert()
-{
-	getElementById("alertBox");
-	}</script>
+	function allert() {
+		getElementById("alertBox");
+	}
+</script>
 </head>
 <body>
-<div class="header">
+	<div class="header">
 		<h1>
 			<a href="index.html" id="StartPage">SuperWoman</a>
 		</h1>
-  </div>
-  <nav>
-    <div class="container">
-      <ul>
-        <li>
-          <a href="aboutUs.html">About Us</a>
-        </li>
-        <li>
-          <div class="dropdown"><a href="categoryLevels.html"> Play Game </a>
-            <ul class="dropdown-items">
-              <li><a href="levelsMath.html">Math</a></li>
-              <li><a href="levelsHistory.html">History</a></li>
-              <li><a href="levelsItems.html">WordHunting</a></li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <a href="../Webapp/login.jsp">LogIn</a>
-        </li>
-        <li>
-          <a href="../Webapp/signUp.jsp">SignUp</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-<h1>Math</h1>
+	</div>
+	<nav>
+		<div class="container">
+			<ul>
+				<li><a href="aboutUs.html">About Us</a></li>
+				<li>
+					<div class="dropdown">
+						<a href="categoryLevels.html"> Play Game </a>
+						<ul class="dropdown-items">
+							<li><a href="levelsMath.html">Math</a></li>
+							<li><a href="levelsHistory.html">History</a></li>
+							<li><a href="levelsItems.html">WordHunting</a></li>
+						</ul>
+					</div>
+				</li>
+				<li><a href="profile.html">Profile</a></li>
+				<li><a href="signUp.html">SignUp</a></li>
+			</ul>
+		</div>
+	</nav>
+	<h1>Math</h1>
 
-<p> The category Math has the aim to solve arithmetic problems. <br>
+	<p>
+		The category Math has the aim to solve arithmetic problems. <br>
 
-At the beginning of a level you will see a equation and during the level you will have to collect the fitting numbers to solve the equation. <br>
+		At the beginning of a level you will see a equation and during the
+		level you will have to collect the fitting numbers to solve the
+		equation. <br> You need to find the correct numbers until the
+		time has run out. If you win, the next level will be unlocked - if
+		not, you'll have to replay the level.<br> Good luck and have fun!
+	</p>
 
-You need to find the correct numbers until the time has run out.
-If you win, the next level will be unlocked - if not, you'll have to replay the level.<br>
+	<h2>Choose a Level</h2>
 
-Good luck and have fun!</p>
+	<a id="Level" href="playGame.html">
+		<button>Level 1</button>
+	</a>
+	<br>
+	<button>Level 2</button onclick="alert">
 
-<h2> Choose a Level</h2>
+	<br>
+	<br>
+	<br>
+	<a href="categoryLevels.html">
+		<button>Back</button>
+	</a>
 
-<a id="Level" href="playGame.html"> <button>Level 1</button> </a> <br>
-<button>Level 2</button onclick="alert">
-
-<br>
-<br> 
-<br>
-<a href="categoryLevels.html"> <button>Back</button> </a>
-
-<div id="alertBox" hidden="true" class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  This is an alert box.
-</div>
+	<div id="alertBox" hidden="true" class="alert">
+		<span class="closebtn"
+			onclick="this.parentElement.style.display='none';">&times;</span>
+		This is an alert box.
+	</div>
 </body>
 </html>

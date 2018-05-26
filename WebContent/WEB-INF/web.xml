@@ -22,37 +22,37 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping> -->
 
-	<context-param>
+	<!-- <context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/spring/spring.xml 
 		</param-value>
-	</context-param>
-    <listener>
+	</context-param> -->
+    <!-- <listener>
         <listener-class>
           org.springframework.web.context.ContextLoaderListener
         </listener-class>
-    </listener>
+    </listener> -->
  
     <!-- Spring Security -->
-    <filter>
+    <!-- <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping> -->
 
 	<!-- Your filter definition -->
-	<filter>
+	<!-- <filter>
     	<filter-name>formAuthenticationFilter</filter-name>
     	<filter-class>game.security.filter.PasswordLoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 	    <filter-name>formAuthenticationFilter</filter-name>
 	    <url-pattern>/Webapp/login.jsp</url-pattern>
-	</filter-mapping> 
+	</filter-mapping>  --> 
 
 
 	<!-- <filter-mapping>
