@@ -39,7 +39,7 @@
 		</ul>
 	</div>
 	</nav>
-	
+
 	<c:url value="/loginNew" var="loginUrl" />
 
 	<form action="${loginUrl}" method="post">
