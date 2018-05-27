@@ -156,7 +156,8 @@ const context = canvas.getContext('2d');
 			drawGap();
 			loadcity();
 			loadGround();
-			// loadBricks();
+			//loadBricks();
+			
 			if (input.keyStates.get(RIGHTARROW)) {
 				if(pos.x > 330) {
 					posBackground.x -= 2.7;
@@ -165,8 +166,8 @@ const context = canvas.getContext('2d');
 							posPath[x] = posPath[x] -0.018;
 					}
 					for(let x = 0; x < posGap.length; ++x) {
-						posGap[x] = posGap[x] -0.018;
 						checkGameOver();
+						posGap[x] = posGap[x] -0.018;
 					}
 					for(let x = 0; x < posBrick.length; ++x) {
 						posBrick[x] = posBrick[x] -2.8;
@@ -217,8 +218,6 @@ const context = canvas.getContext('2d');
 		}
 		
 		function stopGame() {
-			pos.x = 33;
-			pos.y = 499;
 			drawGameover();
 			cancelAnimationFrame();
 		}
@@ -236,7 +235,6 @@ const context = canvas.getContext('2d');
 		drawGap();
 		loadcity();
 		setTimeout(loadGround, 200, pos.x, pos.y);
-		//loadBricks();
-		// setTimeout(loadBricks, 200, 150, 250);
+		//setTimeout(loadBricks, 200, 150, 250);
 		setTimeout(loadFigur, 200, pos.x, pos.y);
 		update();
