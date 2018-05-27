@@ -5,7 +5,6 @@ import {loadImage, loadLevel} from './loaders.js';
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
-// context.fillRect(0,0,500,500);
 
 	var pos = {
 		x: 40,
@@ -23,7 +22,7 @@ const context = canvas.getContext('2d');
 	var posBrick = new Array();
 	
 		function loadcity() {
-			return loadImage('img/city.PNG')
+			return loadImage('img/city2.png')
 				.then(image => {
 					const sprites = new SpriteSheet(image, 800, 471);
 					sprites.define('city', 0, 0);
@@ -36,7 +35,7 @@ const context = canvas.getContext('2d');
 		function drawGameover() {
 			return loadImage('img/gameOver.png')
 				.then(image => {
-					const sprites = new SpriteSheet(image, 800, 471);
+					const sprites = new SpriteSheet(image, 800, 584);
 					sprites.define('gameOver', 0, 0);
 					sprites.draw('gameOver', context, 1,0);
 				});
