@@ -3,11 +3,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <link href="css/style.css" rel="stylesheet">
-<title>Category</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+<title>Profile</title>
 </head>
 <body>
+
 	<div class="header">
 		<h1>
 			<a href="index.html" id="StartPage">SuperWoman</a>
@@ -32,15 +31,18 @@
 			</ul>
 		</div>
 	</nav>
-	<h1 class="headline">Choose a Category</h1>
+	<h1>Profile</h1>
+	
+	<label>Name:</label> <input type="text" disabled="disabled" value="name">  <br> <br> 
+	<label>Email:</label> <input type="text" disabled="disabled" value="email@test.de">  <br> <br>
+	<label>Education Level:</label> <select
+			id="Education" name="education" disabled="disabled" size="1">
+			<option>Elementary School</option>
+			<option>Secondary School</option>
+		</select><br> <br>
+	<label>Password:</label> <input type="password" disabled="disabled" value="name">  <br> <br>
+	<button>Edit Account</button>
+	<button>Delete Account</button>
 
-	<a id="Item" href="levelsItems.html"><img alt="" width="300"
-		height="300" src="img/apple.png"></a>
-
-	<a id="Math" href="levelsMath.html"><img alt="" width="300"
-		height="300" src="img/abacus.png"></a>
-
-	<a id="History" href="levelsHistory.html"><img alt="" width="300"
-		height="300" src="img/book.png"></a>
 </body>
 </html>

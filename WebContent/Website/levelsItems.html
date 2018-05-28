@@ -2,69 +2,74 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link href="style.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 <title>Level</title>
 <script type="text/javascript">
-function allert()
-{
-	getElementById("alertBox");
-	}</script>
+	function allert() {
+		getElementById("alertBox");
+	}
+</script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
 </head>
 <body>
-<div class="header">
+	<div class="header">
 		<h1>
 			<a href="index.html" id="StartPage">SuperWoman</a>
 		</h1>
-  </div>
-  <nav>
-    <div class="container">
-      <ul>
-        <li>
-          <a href="aboutUs.html">About Us</a>
-        </li>
-        <li>
-          <div class="dropdown"><a href="categoryLevels.html"> Play Game </a>
-            <ul class="dropdown-items">
-              <li><a href="levelsMath.html">Math</a></li>
-              <li><a href="levelsHistory.html">History</a></li>
-              <li><a href="levelsItems.html">WordHunting</a></li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <a href="signInPage.html">LogIn</a>
-        </li>
-        <li>
-          <a href="signUp.html">SignUp</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-<h1 class="headline">Word Hunting</h1>
+	</div>
+	<nav>
+		<div class="container">
+			<ul>
+				<li><a href="aboutUs.html">About Us</a></li>
+				<li>
+					<div class="dropdown">
+						<a href="categoryLevels.html"> Play Game </a>
+						<ul class="dropdown-items">
+							<li><a href="levelsMath.html">Math</a></li>
+							<li><a href="levelsHistory.html">History</a></li>
+							<li><a href="levelsItems.html">WordHunting</a></li>
+						</ul>
+					</div>
+				</li>
+				<li><a href="profile.html">Profile</a></li>
+				<li><a href="signUp.html">SignUp</a></li>
+			</ul>
+		</div>
+	</nav>
+	<h1 class="headline">Word Hunting</h1>
 
-<p> The category <i>Word Hunting</i> has the aim to find the correct word to a shown picture.<br>
+	<p>
+		The category <i>Word Hunting</i> has the aim to find the correct word
+		to a shown picture.<br> At the beginning of a level you will see
+		a picture of an item and during the level you will have to collect the
+		fitting letters to complete the word. You need to find the correct
+		letters until the time has run out.<br> If you win, the next
+		level will be unlocked - if not, you'll have to replay the level.<br>
+		<br> Good luck and have fun!
+	</p>
 
-At the beginning of a level you will see a picture of an item and during the level you will have to collect the fitting letters to complete the word.
-You need to find the correct letters until the time has run out.<br>
-If you win, the next level will be unlocked - if not, you'll have to replay the level.<br><br>
+	<h2>Choose a Level</h2>
 
-Good luck and have fun!</p>
+	<a id="Level" href="playGame.html">
+		<button>Level 1</button>
+	</a>
+	<br>
+	<a id="Level" href="couldntLoadLevel.html">
+		<button id="Lock">Level 2</button>
+	</a>
 
-<h2> Choose a Level</h2>
+	<br>
+	<br>
+	<br>
+	<a href="categoryLevels.html">
+		<button>Back</button>
+	</a>
 
-<a id="Level" href="playGame.html"> <button>Level 1</button> </a> <br>
-<a id="Level" href="couldntLoadLevel.html"> <button id="Lock">Level 2</button> </a>
-
-<br>
-<br> 
-<br>
-<a href="categoryLevels.html"> <button>Back</button> </a>
-
-<div id="alertBox" hidden="true" class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  This is an alert box.
-</div>
+	<div id="alertBox" hidden="true" class="alert">
+		<span class="closebtn"
+			onclick="this.parentElement.style.display='none';">&times;</span>
+		This is an alert box.
+	</div>
 </body>
 </html>

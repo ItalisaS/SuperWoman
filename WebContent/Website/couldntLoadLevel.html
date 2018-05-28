@@ -2,43 +2,38 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link href="style.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 <title>Level couldn't Load</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
 </head>
 <div class="header">
-		<h1>
-			<a href="index.html" id="StartPage">SuperWoman</a>
-		</h1>
-  </div>
-  <nav>
-    <div class="container">
-      <ul>
-        <li>
-          <a href="aboutUs.html">About Us</a>
-        </li>
-        <li>
-          <div class="dropdown"><a href="categoryLevels.html"> Play Game </a>
-            <ul class="dropdown-items">
-              <li><a href="levelsMath.html">Math</a></li>
-              <li><a href="levelsHistory.html">History</a></li>
-              <li><a href="levelsItems.html">WordHunting</a></li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <a href="signInPage.html">LogIn</a>
-        </li>
-        <li>
-          <a href="signUp.html">SignUp</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+	<h1>
+		<a href="index.html" id="StartPage">SuperWoman</a>
+	</h1>
+</div>
+<nav>
+	<div class="container">
+		<ul>
+			<li><a href="aboutUs.html">About Us</a></li>
+			<li>
+				<div class="dropdown">
+					<a href="categoryLevels.html"> Play Game </a>
+					<ul class="dropdown-items">
+						<li><a href="levelsMath.html">Math</a></li>
+						<li><a href="levelsHistory.html">History</a></li>
+						<li><a href="levelsItems.html">WordHunting</a></li>
+					</ul>
+				</div>
+			</li>
+			<li><a href="profile.html">Profile</a></li>
+			<li><a href="signUp.html">SignUp</a></li>
+		</ul>
+	</div>
+</nav>
 <body>
 	<form action="categoryLevels.html">
-		<h2>This Level is unlockt for this User.</h2>
+		<h2>This Level is locked for this User.</h2>
 		<button id="OKNotLoadLevel" type="submit">OK</button>
 	</form>
 </body>
