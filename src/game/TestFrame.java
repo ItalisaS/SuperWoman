@@ -107,7 +107,7 @@ public class TestFrame extends JPanel implements Runnable, KeyListener
 				isFalling = true;
 				i = i / 2;
 			}
-			// Wenn Sprunghˆhe erreicht ist f‰ngt die Figur an zu fallen
+			// Wenn Sprungh√∂he erreicht ist, f√§ngt die Figur an zu fallen
 			if (i == 0 && (isFalling || isJumping))
 			{
 				isJumping = false;
@@ -121,7 +121,7 @@ public class TestFrame extends JPanel implements Runnable, KeyListener
 	public void move()
 	{
 		// Spielfigur bewegen
-		// l‰uft nicht/nach rechts
+		// l√§uft nicht/nach rechts
 		if (motionImg != -3)
 		{
 			if ((left + motionImg) <= 150)
