@@ -1,6 +1,8 @@
 package dbConnection;
 
 import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class UserDaoImpl implements UserDao{
@@ -33,7 +35,7 @@ public class UserDaoImpl implements UserDao{
 		
 		String sql = "DELETE FROM user WHERE username=?";
 		
-		jdbcTemplate.update(sql, new Object[] {user.getUsername()})
+		jdbcTemplate.update(sql, new Object[] {user.getUsername()});
 	}
 
 

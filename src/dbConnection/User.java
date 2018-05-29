@@ -4,7 +4,7 @@ public class User {
 
 //	private int id;
 	
-	@Id
+	
 	private String username;
 	private String email;
 	private String password;
