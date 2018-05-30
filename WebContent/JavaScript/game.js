@@ -20,6 +20,7 @@ const context = canvas.getContext('2d');
 	var posPath = new Array();
 	var posGap = new Array();
 	var posBrick = new Array();
+	//window.setInterval(update, 9000);
 	
 		function loadcity() {
 			return loadImage('img/city2.png')
@@ -76,7 +77,7 @@ const context = canvas.getContext('2d');
 		function drawPath(background, context, sprites) {
 			background.ranges.forEach(([x1,x2,y1,y2]) => {
 				for(let x = x1; x < x2; ++x) {
-					if(firstLoop == true) {
+					if(firstLoop) {
 						// posPath.push(x*background.distance[x]);
 						if(-(background.distance[x] - 1 ))
 							posPath.push(x);
@@ -151,48 +152,50 @@ const context = canvas.getContext('2d');
 				}
 			}
 		}
-
+		var myReq;
 		function update() {
-			drawGap();
-			loadcity();
-			loadGround();
-			//loadBricks();
-			
-			if (input.keyStates.get(RIGHTARROW)) {
-				if(pos.x > 330) {
-					posBackground.x -= 2.7;
-					firstLoop = false;
-					for(let x = 0; x < posPath.length; ++x) {
-							posPath[x] = posPath[x] -0.018;
+			if(gameoverbool)
+				drawGameover();
+			else{
+				drawGap();
+				loadcity();
+				loadGround();
+				loadBricks();
+				if (input.keyStates.get(RIGHTARROW)) {
+					if(pos.x > 330) {
+						posBackground.x -= 2.7;
+						firstLoop = false;
+						for(let x = 0; x < posPath.length; ++x) {
+								posPath[x] = posPath[x] -0.018;
+						}
+						for(let x = 0; x < posGap.length; ++x) {
+							checkGameOver();
+							posGap[x] = posGap[x] -0.018;
+						}
+						for(let x = 0; x < posBrick.length; ++x) {
+							posBrick[x] = posBrick[x] -2.8;
+						}
 					}
-					for(let x = 0; x < posGap.length; ++x) {
-						checkGameOver();
-						posGap[x] = posGap[x] -0.018;
+					else {
+						move(2.7, 0);
 					}
-					for(let x = 0; x < posBrick.length; ++x) {
-						posBrick[x] = posBrick[x] -2.8;
+				} else if (input.keyStates.get(LEFTARROW)) {
+					checkGameOver();
+					move(-2.7, 0);
+				} else {
+					checkGameOver();
+				}
+				
+				if (input.keyStates.get(SPACE)) {
+					if (!isJumping && !isFalling) {
+						isJumping = true;
+						i = 72;
 					}
 				}
-				else {
-					move(2.7, 0);
-				}
-			} else if (input.keyStates.get(LEFTARROW)) {
-				checkGameOver();
-				move(-2.7, 0);
-			} else {
-				checkGameOver();
+				jump();
+				loadFigur();
 			}
-			
-			if (input.keyStates.get(SPACE)) {
-				if (!isJumping && !isFalling) {
-					isJumping = true;
-					i = 72;
-				}
-			}
-			jump();
-			loadFigur();
-
-			requestAnimationFrame(update);
+			myReq = requestAnimationFrame(update);
 		}
 		
 		function checkGameOver() {
@@ -201,6 +204,7 @@ const context = canvas.getContext('2d');
 					stopGame();
 				}
 			}
+			
 		}
 
 		function move(x, y) {
@@ -216,10 +220,11 @@ const context = canvas.getContext('2d');
 			}
 			
 		}
-		
+		var gameoverbool;
 		function stopGame() {
-			drawGameover();
-			cancelAnimationFrame();
+			gameoverbool = true;
+			//drawGameover();
+			//cancelAnimationFrame(myReq);
 		}
 
 		const LEFTARROW = 37;
@@ -232,9 +237,16 @@ const context = canvas.getContext('2d');
 		input.listenTo(window);
 		
 		// load and draw images
-		drawGap();
-		loadcity();
-		setTimeout(loadGround, 200, pos.x, pos.y);
-		//setTimeout(loadBricks, 200, 150, 250);
-		setTimeout(loadFigur, 200, pos.x, pos.y);
-		update();
+		
+//		var calculated_time_in_ms = getCurrentTimeInMs();
+//		while(gameoverbool == false) {
+			drawGap();
+			loadcity();
+			setTimeout(loadGround, 200, pos.x, pos.y);
+			setTimeout(loadBricks, 200, 150, 250);
+			setTimeout(loadFigur, 200, pos.x, pos.y);
+			setTimeout(function() {
+				update();
+			}, 100);
+			
+			//update();
