@@ -5,12 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Log in</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
+
 <body>
 	<link href="../Website/css/style.css" rel="stylesheet">
 	<title>Login</title>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
 </head>
 
 
@@ -40,17 +40,17 @@
 	</div>
 	</nav>
 
-	<c:url value="/loginNew" var="loginUrl" />
+	<c:url value="/newLogin.jsp" var="loginUrl" />
 
 	<form action="${loginUrl}" method="post">
 
 		<h2>Sign In</h2>
-		<%-- <c:if test="${param.error != null}">
+		<c:if test="${param.error != null}">
 			<p>Invalid username and password.</p>
 		</c:if>
 		<c:if test="${param.logout != null}">
 			<p>You have been logged out.</p>
-		</c:if> --%>
+		</c:if> 
 		<p>
 			<label for="username">Name</label> <br> <input type="text"
 				id="username" name="username" />

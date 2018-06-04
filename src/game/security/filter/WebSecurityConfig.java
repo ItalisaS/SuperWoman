@@ -39,13 +39,13 @@ public class WebSecurityConfig extends SecurityConfig implements WebMvcConfigure
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -57,43 +57,43 @@ public class WebSecurityConfig extends SecurityConfig implements WebMvcConfigure
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -105,29 +105,19 @@ public class WebSecurityConfig extends SecurityConfig implements WebMvcConfigure
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/Webapp/newLogin.jsp").setViewName("login");
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		// TODO Auto-generated method stub
-		
-	}
 
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests()
-////				.antMatchers("*/Website/index.html", "**/Website/index.html", "*/WebContext/Website/index.html", "**/WebContext/Website/index.html", "/index", "**/index.html", "/Webapp/signUp.jsp", "/Webapp/login.jsp", "/Website/aboutUs.html",
-////						"/Website/signInPage.html", "/Website/css/**").permitAll()
-//				.anyRequest().authenticated()  
-//				.and()
-//				.formLogin()
-//				.loginPage("/loginNew").permitAll();
-//	}
+	}
 
 }
