@@ -19,7 +19,7 @@ public class SignUp_StepDefinition
 {
 	private static WebDriver driver = null;
 	private String email = "Email";
-	private String password = "Password";
+	private String passwordValue = "Password";
 
 
 	@Before
