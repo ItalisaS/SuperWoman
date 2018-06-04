@@ -1,6 +1,5 @@
 package featuretest;
 
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -14,127 +13,96 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-
-public class SignUp_StepDefinition
-{
+public class SignUp_StepDefinition {
 	private static WebDriver driver = null;
 	private String email = "Email";
-	private String passwordValue = "Password";
-
+	private String pw = "Password";
 
 	@Before
-	public static void setup()
-	{
+	public static void setup() {
 		System.setProperty("webdriver.chrome.driver", "./chromedriverNew.exe");
 		driver = new ChromeDriver();
 	}
 
-
 	@After
-	public void clean()
-	{
+	public void clean() {
 		driver.close();
 	}
 
-
 	@Given("^Visitor is on SignUp page$")
-	public void Visitor_is_on_SignUp_page() throws Throwable
-	{
+	public void Visitor_is_on_SignUp_page() throws Throwable {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get("http://localhost:8080/SuperWoman/Website/signUp.html");
 	}
 
-
 	@When("^Visitor provides username <username>, email <email>, password <password>$")
-	public void Visitor_provides_username_username_email_email_password_password() throws Throwable
-	{
+	public void Visitor_provides_username_username_email_email_password_password() throws Throwable {
 		driver.findElement(By.id("Name")).sendKeys("name");
 		driver.findElement(By.id(email)).sendKeys("email");
-		driver.findElement(By.id(passwordValue)).sendKeys("password");
+		driver.findElement(By.id(pw)).sendKeys("password");
 
 		assertTrue(checkInput());
 	}
 
-
-	private Boolean checkInput()
-	{
+	private Boolean checkInput() {
 		String value = "value";
-		if (!(driver.findElement(By.id("Name")).getAttribute(value).equals("")))
-		{
-			if (!(driver.findElement(By.id(email)).getAttribute(value).equals("")))
-			{
-				if (!(driver.findElement(By.id(passwordValue)).getAttribute(value).equals("")))
-				{
-					return true;
-				}
+		if (!(driver.findElement(By.id("Name")).getAttribute(value).equals(""))) {
+			if ((!(driver.findElement(By.id(email)).getAttribute(value).equals(""))
+					&& !(driver.findElement(By.id(pw)).getAttribute(value).equals("")))) {
+				return true;
 			}
 		}
 		return false;
 	}
 
-
 	@When("^Chooses education level$")
-	public void Chooses_education_level() throws Throwable
-	{
+	public void Chooses_education_level() throws Throwable {
 		if (driver.findElement(By.id("Education")).getText() != null
-				|| !(driver.findElement(By.id("Education")).getText().equals("")))
-		{
+				|| !(driver.findElement(By.id("Education")).getText().equals(""))) {
 			System.out.println("Education Level is choose");
 		}
 	}
 
-
 	@Then("^Visitor created an account$")
-	public void Visitor_created_an_account() throws Throwable
-	{
+	public void Visitor_created_an_account() throws Throwable {
 		driver.findElement(By.id("Save")).click();
 	}
 
-
 	@Then("^Visitor should be shown a success message$")
-	public void Visitor_should_be_shown_a_success_message() throws Throwable
-	{
+	public void Visitor_should_be_shown_a_success_message() throws Throwable {
 		String url = driver.getCurrentUrl();
 		assertEquals("http://localhost:8080/SuperWoman/Website/accountCreated.html", url);
 	}
 
-
 	@When("^Account with the given email or username already exists$")
-	public void Account_with_the_given_email_or_username_already_exists() throws Throwable
-	{
+	public void Account_with_the_given_email_or_username_already_exists() throws Throwable {
 		// Cannot be tested yet, because there is no database to compare.
 	}
 
-
 	@Then("^Visitor did not create an account$")
-	public void Visitor_did_not_create_an_account() throws Throwable
-	{
+	public void Visitor_did_not_create_an_account() throws Throwable {
 		driver.findElement(By.id("Save")).click();
 	}
-	
-	
+
 	@Then("^Visitor should not be shown the next page$")
 	public void Visitor_should_not_be_shown_the_next_page() throws Throwable {
 		String url = driver.getCurrentUrl();
 		assertEquals("http://localhost:8080/SuperWoman/Website/signUp.html", url);
 	}
 
-
 	@Then("^Visitor should be shown an error message$")
-	public void Visitor_should_be_shown_an_error_message() throws Throwable
-	{
+	public void Visitor_should_be_shown_an_error_message() throws Throwable {
 		String url = driver.getCurrentUrl();
-//		assertEquals("http://localhost:8080/SuperWoman/Website/accountCreatedFail.html", url);
+		// assertEquals("http://localhost:8080/SuperWoman/Website/accountCreatedFail.html",
+		// url);
 	}
 
-
 	@When("^Visitor did not fill in all required elements$")
-	public void Visitor_did_not_fill_in_all_required_elements() throws Throwable
-	{
+	public void Visitor_did_not_fill_in_all_required_elements() throws Throwable {
 		driver.findElement(By.id("Name")).sendKeys("");
 		driver.findElement(By.id(email)).sendKeys("");
-		driver.findElement(By.id(passwordValue)).sendKeys("");
-		
+		driver.findElement(By.id(pw)).sendKeys("");
+
 		assertFalse(checkInput());
 	}
 }
