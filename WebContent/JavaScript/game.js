@@ -120,7 +120,7 @@ input.listenTo(window);
 					sprites.define("ground", 0, 0);
 					
 					loadLevel("level1")
-					.then(level => {
+					.then((level) => {
 						// console.log(level);
 						drawPath(level.backgrounds[0], context, sprites);
 					});
@@ -142,7 +142,7 @@ input.listenTo(window);
 									posGap.push(x);
 								}
 							}
-						})
+						});
 					}
 				for(let x = 0; x < 70; ++x) {
 					sprites.drawTile("gap", context, posGap[x], 471);
@@ -240,13 +240,13 @@ input.listenTo(window);
 			myReq = requestAnimationFrame(update);
 		}
 		
-		    // load and draw images
+    // load and draw images
 	drawGap();
 	loadcity();
 	setTimeout(loadGround, 200, pos.x, pos.y);
 	setTimeout(loadBricks, 200, 150, 250);
 	setTimeout(loadFigur, 200, pos.x, pos.y);
 	setTimeout(function() {
-		update();
-	}, 100);
+			update();
+		}, 100);
 			
