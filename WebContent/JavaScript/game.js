@@ -239,10 +239,7 @@ input.listenTo(window);
 			myReq = requestAnimationFrame(update);
 		}
 		
-		// load and draw images
-		
-//		var calculated_time_in_ms = getCurrentTimeInMs();
-//		while(gameoverbool == false) {
+		    // load and draw images
 			drawGap();
 			loadcity();
 			setTimeout(loadGround, 200, pos.x, pos.y);
@@ -252,4 +249,3 @@ input.listenTo(window);
 				update();
 			}, 100);
 			
-			//update();
