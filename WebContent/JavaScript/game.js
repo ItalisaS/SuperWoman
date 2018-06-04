@@ -11,9 +11,9 @@ const LEFTARROW = 37;
 const RIGHTARROW = 39;
 const SPACE = 32;
 const input = new KeyboardState();
-input.addMapping(LEFTARROW, (keyState)=> { });
-input.addMapping(RIGHTARROW, (keyState)=> { });
-input.addMapping(SPACE, (keyState)=> { });
+input.addMapping(LEFTARROW, (keyState) => { });
+input.addMapping(RIGHTARROW, (keyState) => { });
+input.addMapping(SPACE, (keyState) => { });
 input.listenTo(window);
 
 	var pos = {
@@ -83,7 +83,7 @@ input.listenTo(window);
 		
 		function loadBricks() {
 			return loadImage("img/Brick.PNG")
-				.then(image => {
+				.then((image) => {
 					const sprites = new SpriteSheet(image, 50, 50);
 					sprites.define("brick", 0, 0);
 					loadLevel("level1")
