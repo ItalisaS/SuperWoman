@@ -32,6 +32,12 @@ input.listenTo(window);
 	var posBrick = new Array(); 
 	//window.setInterval(update, 9000);
 	
+	function stopGame() {
+		gameoverbool = true;
+		//drawGameover();
+		//cancelAnimationFrame(myReq);
+	}
+	
 	function move(x, y) {
 		pos.x += x;
 		pos.y += y;
@@ -231,13 +237,6 @@ input.listenTo(window);
 				loadFigur();
 			}
 			myReq = requestAnimationFrame(update);
-		}
-		
-		
-		function stopGame() {
-			gameoverbool = true;
-			//drawGameover();
-			//cancelAnimationFrame(myReq);
 		}
 		
 		// load and draw images

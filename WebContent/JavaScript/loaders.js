@@ -1,8 +1,8 @@
 
 export function loadImage(url) {
-	return new Promise(resolve => {
+	return new Promise((resolve) => {
 			const image = new Image();
-			image.addEventListener('load', () => {
+			image.addEventListener("load", () => {
 					resolve(image);
 			});
 			image.src = url;
@@ -10,6 +10,6 @@ export function loadImage(url) {
 }
 
 export function loadLevel(name) {
-	return fetch('./Level/level1.json')
-	.then(r => r.json());
+	return fetch("./Level/level1.json")
+	.then((r) => r.json());
 }
