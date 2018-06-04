@@ -6,6 +6,7 @@ import {loadImage, loadLevel} from "./loaders.js";
 const canvas = document.getElementById("screen");
 const context = canvas.getContext("2d");
 
+var gameoverbool;
 const LEFTARROW = 37;
 const RIGHTARROW = 39;
 const SPACE = 32;
@@ -44,6 +45,16 @@ input.listenTo(window);
 		}
 		
 	}
+	
+	function checkGameOver() {
+		for(let x = 0; x < posGap.length; ++x) {
+			if(1.6<posGap[x] && posGap[x]<2.6 && pos.y === 399) {
+				stopGame();
+			}
+		}
+		
+	}
+
 		function loadcity() {
 			return loadImage("img/city2.png")
 				.then((image) => {
@@ -86,8 +97,9 @@ input.listenTo(window);
 				for(let x = x1; x < x2; ++x) {
 					if(firstLoop) {
 						// posPath.push(x*background.distance[x]);
-						if(-(background.distance[x] - 1 ))
+						if(-(background.distance[x] - 1 )) {
 							posPath.push(x);
+						}
 					}
 					sprites.drawTile(background.ground, context, posPath[x] , 471);
 				}
@@ -120,8 +132,9 @@ input.listenTo(window);
 						loadLevel("level1")
 						.then(level => {
 							for(let x = 0; x < 70; ++x) {
-								if (level.backgrounds[0].distance[x])
+								if (level.backgrounds[0].distance[x]) {
 									posGap.push(x);
+								}
 							}
 						})
 					}
@@ -220,16 +233,7 @@ input.listenTo(window);
 			myReq = requestAnimationFrame(update);
 		}
 		
-		function checkGameOver() {
-			for(let x = 0; x < posGap.length; ++x) {
-				if(1.6<posGap[x] && posGap[x]<2.6 && pos.y == 399) {
-					stopGame();
-				}
-			}
-			
-		}
-
-		var gameoverbool;
+		
 		function stopGame() {
 			gameoverbool = true;
 			//drawGameover();
