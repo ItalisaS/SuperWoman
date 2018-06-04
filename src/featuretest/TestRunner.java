@@ -1,4 +1,4 @@
-package featureTest;
+package featuretest;
 
 import org.junit.runner.RunWith;
 

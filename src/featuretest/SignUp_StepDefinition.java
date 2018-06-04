@@ -1,4 +1,4 @@
-package featureTest;
+package featuretest;
 
 
 import java.util.concurrent.TimeUnit;
@@ -18,10 +18,12 @@ import cucumber.api.java.en.When;
 public class SignUp_StepDefinition
 {
 	private static WebDriver driver = null;
+	private String email = "Email";
+	private String passwordValue = "Password";
 
 
 	@Before
-	public void setup()
+	public static void setup()
 	{
 		System.setProperty("webdriver.chrome.driver", "./chromedriverNew.exe");
 		driver = new ChromeDriver();
@@ -47,8 +49,8 @@ public class SignUp_StepDefinition
 	public void Visitor_provides_username_username_email_email_password_password() throws Throwable
 	{
 		driver.findElement(By.id("Name")).sendKeys("name");
-		driver.findElement(By.id("Email")).sendKeys("email");
-		driver.findElement(By.id("Password")).sendKeys("password");
+		driver.findElement(By.id(email)).sendKeys("email");
+		driver.findElement(By.id(passwordValue)).sendKeys("password");
 
 		assertTrue(checkInput());
 	}
@@ -56,12 +58,12 @@ public class SignUp_StepDefinition
 
 	private Boolean checkInput()
 	{
-
-		if (!(driver.findElement(By.id("Name")).getAttribute("value").equals("")))
+		String value = "value";
+		if (!(driver.findElement(By.id("Name")).getAttribute(value).equals("")))
 		{
-			if (!(driver.findElement(By.id("Email")).getAttribute("value").equals("")))
+			if (!(driver.findElement(By.id(email)).getAttribute(value).equals("")))
 			{
-				if (!(driver.findElement(By.id("Password")).getAttribute("value").equals("")))
+				if (!(driver.findElement(By.id(passwordValue)).getAttribute(value).equals("")))
 				{
 					return true;
 				}
@@ -130,8 +132,8 @@ public class SignUp_StepDefinition
 	public void Visitor_did_not_fill_in_all_required_elements() throws Throwable
 	{
 		driver.findElement(By.id("Name")).sendKeys("");
-		driver.findElement(By.id("Email")).sendKeys("");
-		driver.findElement(By.id("Password")).sendKeys("");
+		driver.findElement(By.id(email)).sendKeys("");
+		driver.findElement(By.id(passwordValue)).sendKeys("");
 		
 		assertFalse(checkInput());
 	}

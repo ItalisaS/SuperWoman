@@ -1,4 +1,4 @@
-package featureTest;
+package featuretest;
 
 
 import java.util.concurrent.TimeUnit;
@@ -21,7 +21,7 @@ public class ChooseLevel_StepDefinition
 
 
 	@Before
-	public void setup()
+	public static void setup()
 	{
 		System.setProperty("webdriver.chrome.driver", "./chromedriverNew.exe");
 		driver = new ChromeDriver();
