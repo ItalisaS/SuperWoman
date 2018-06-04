@@ -50,7 +50,7 @@ public class SignUp_StepDefinition
 	{
 		driver.findElement(By.id("Name")).sendKeys("name");
 		driver.findElement(By.id(email)).sendKeys("email");
-		driver.findElement(By.id(password)).sendKeys("password");
+		driver.findElement(By.id(passwordValue)).sendKeys("password");
 
 		assertTrue(checkInput());
 	}
@@ -63,7 +63,7 @@ public class SignUp_StepDefinition
 		{
 			if (!(driver.findElement(By.id(email)).getAttribute(value).equals("")))
 			{
-				if (!(driver.findElement(By.id(password)).getAttribute(value).equals("")))
+				if (!(driver.findElement(By.id(passwordValue)).getAttribute(value).equals("")))
 				{
 					return true;
 				}
@@ -133,7 +133,7 @@ public class SignUp_StepDefinition
 	{
 		driver.findElement(By.id("Name")).sendKeys("");
 		driver.findElement(By.id(email)).sendKeys("");
-		driver.findElement(By.id(password)).sendKeys("");
+		driver.findElement(By.id(passwordValue)).sendKeys("");
 		
 		assertFalse(checkInput());
 	}
