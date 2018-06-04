@@ -1,4 +1,4 @@
-package featureTest;
+package featuretest;
 
 
 import java.util.concurrent.TimeUnit;
