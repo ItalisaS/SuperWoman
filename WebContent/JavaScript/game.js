@@ -87,7 +87,7 @@ input.listenTo(window);
 					const sprites = new SpriteSheet(image, 50, 50);
 					sprites.define("brick", 0, 0);
 					loadLevel("level1")
-					.then(level => {
+					.then((level) => {
 						for(let x = 0; x < 5; ++x) {
 							if (firstLoop) {
 								posBrick.push(level.backgrounds[0].positionBrick[x]);
@@ -123,7 +123,7 @@ input.listenTo(window);
 					.then(level => {
 						// console.log(level);
 						drawPath(level.backgrounds[0], context, sprites);
-					})
+					});
 				});
 		}
 		
@@ -195,8 +195,9 @@ input.listenTo(window);
 		}
 		var myReq;
 		function update() {
-			if(gameoverbool)
+			if(gameoverbool) {
 				drawGameover();
+			}
 			else{
 				drawGap();
 				loadcity();
@@ -240,12 +241,12 @@ input.listenTo(window);
 		}
 		
 		    // load and draw images
-			drawGap();
-			loadcity();
-			setTimeout(loadGround, 200, pos.x, pos.y);
-			setTimeout(loadBricks, 200, 150, 250);
-			setTimeout(loadFigur, 200, pos.x, pos.y);
-			setTimeout(function() {
-				update();
-			}, 100);
+	drawGap();
+	loadcity();
+	setTimeout(loadGround, 200, pos.x, pos.y);
+	setTimeout(loadBricks, 200, 150, 250);
+	setTimeout(loadFigur, 200, pos.x, pos.y);
+	setTimeout(function() {
+		update();
+	}, 100);
 			
