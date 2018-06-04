@@ -1,10 +1,10 @@
 
-import KeyboardState from './keyboardState.js';
-import SpriteSheet from './spriteSheet.js';
-import {loadImage, loadLevel} from './loaders.js';
+import KeyboardState from "./keyboardState.js";
+import SpriteSheet from "./spriteSheet.js";
+import {loadImage, loadLevel} from "./loaders.js";
 
-const canvas = document.getElementById('screen');
-const context = canvas.getContext('2d');
+const canvas = document.getElementById("screen");
+const context = canvas.getContext("2d");
 
 	var pos = {
 		x: 40,
@@ -19,41 +19,41 @@ const context = canvas.getContext('2d');
 	var firstLoop = true;	
 	var posPath = new Array();
 	var posGap = new Array();
-	var posBrick = new Array();
+	var posBrick = new Array(); 
 	//window.setInterval(update, 9000);
 	
 		function loadcity() {
-			return loadImage('img/city2.png')
+			return loadImage("img/city2.png")
 				.then(image => {
 					const sprites = new SpriteSheet(image, 800, 471);
-					sprites.define('city', 0, 0);
+					sprites.define("city", 0, 0);
 					for(let x = 0; x < 15; ++x) {
-						sprites.draw('city', context, posBackground.x + x* sprites.width, posBackground.y);
+						sprites.draw("city", context, posBackground.x + x* sprites.width, posBackground.y);
 					}
 				});
 		}
 		
 		function drawGameover() {
-			return loadImage('img/gameOver.png')
+			return loadImage("img/gameOver.png")
 				.then(image => {
 					const sprites = new SpriteSheet(image, 800, 584);
-					sprites.define('gameOver', 0, 0);
-					sprites.draw('gameOver', context, 1,0);
+					sprites.define("gameOver", 0, 0);
+					sprites.draw("gameOver", context, 1,0); 
 				});
 		}
 		
 		function loadBricks() {
-			return loadImage('img/Brick.PNG')
+			return loadImage("img/Brick.PNG")
 				.then(image => {
 					const sprites = new SpriteSheet(image, 50, 50);
-					sprites.define('brick', 0, 0);
-					loadLevel('level1')
+					sprites.define("brick", 0, 0);
+					loadLevel("level1")
 					.then(level => {
 						for(let x = 0; x < 5; ++x) {
 							if (firstLoop) {
 								posBrick.push(level.backgrounds[0].positionBrick[x]);
 							}
-							sprites.draw('brick', context, posBrick[x], 200)
+							sprites.draw("brick", context, posBrick[x], 200)
 						}
 					})
 				});
@@ -61,12 +61,12 @@ const context = canvas.getContext('2d');
 
 
 		function loadGround() {
-			return loadImage('img/path.PNG')
+			return loadImage("img/path.PNG")
 				.then(image => {
 					const sprites = new SpriteSheet(image, 147, 113)
-					sprites.define('ground', 0, 0);
+					sprites.define("ground", 0, 0);
 					
-					loadLevel('level1')
+					loadLevel("level1")
 					.then(level => {
 						// console.log(level);
 						drawPath(level.backgrounds[0], context, sprites);
@@ -88,14 +88,14 @@ const context = canvas.getContext('2d');
 		}
 		
 		function drawGap() {
-			return loadImage('img/gap2.png')
+			return loadImage("img/gap2.png")
 			.then(image => {
 				
 				const sprites = new SpriteSheet(image, 147, 113);
-				sprites.define('gap', 0, 0);
+				sprites.define("gap", 0, 0);
 				
 					if(firstLoop == true) { 
-						loadLevel('level1')
+						loadLevel("level1")
 						.then(level => {
 							for(let x = 0; x < 70; ++x) {
 								if (level.backgrounds[0].distance[x])
@@ -104,17 +104,17 @@ const context = canvas.getContext('2d');
 						})
 					}
 				for(let x = 0; x < 70; ++x) {
-					sprites.drawTile('gap', context, posGap[x], 471);
+					sprites.drawTile("gap", context, posGap[x], 471);
 				}
 			});
 		}
 		
 		function loadFigur() {
-			return loadImage('img/superwomanavatar2.png')
+			return loadImage("img/superwomanavatar2.png")
 				.then(image => {
 					const figure = new SpriteSheet(image, 74, 74);
-					figure.define('figure', 0, 0);
-					figure.draw('figure', context, pos.x, pos.y);
+					figure.define("figure", 0, 0);
+					figure.draw("figure", context, pos.x, pos.y);
 				});
 		}
 
