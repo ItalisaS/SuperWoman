@@ -6,6 +6,15 @@ import {loadImage, loadLevel} from "./loaders.js";
 const canvas = document.getElementById("screen");
 const context = canvas.getContext("2d");
 
+const LEFTARROW = 37;
+const RIGHTARROW = 39;
+const SPACE = 32;
+const input = new KeyboardState();
+input.addMapping(LEFTARROW, keyState => { });
+input.addMapping(RIGHTARROW, keyState => { });
+input.addMapping(SPACE, keyState => { });
+input.listenTo(window);
+
 	var pos = {
 		x: 40,
 		y: 399,
@@ -22,9 +31,22 @@ const context = canvas.getContext("2d");
 	var posBrick = new Array(); 
 	//window.setInterval(update, 9000);
 	
+	function move(x, y) {
+		pos.x += x;
+		pos.y += y;
+		
+		if(pos.x < -30)
+		{
+			pos.x = -30;
+		}
+		if(pos.x > 730) {
+			pos.x = 730;
+		}
+		
+	}
 		function loadcity() {
 			return loadImage("img/city2.png")
-				.then(image => {
+				.then((image) => {
 					const sprites = new SpriteSheet(image, 800, 471);
 					sprites.define("city", 0, 0);
 					for(let x = 0; x < 15; ++x) {
@@ -35,7 +57,7 @@ const context = canvas.getContext("2d");
 		
 		function drawGameover() {
 			return loadImage("img/gameOver.png")
-				.then(image => {
+				.then((image) => {
 					const sprites = new SpriteSheet(image, 800, 584);
 					sprites.define("gameOver", 0, 0);
 					sprites.draw("gameOver", context, 1,0); 
@@ -55,25 +77,10 @@ const context = canvas.getContext("2d");
 							}
 							sprites.draw("brick", context, posBrick[x], 200)
 						}
-					})
+					});
 				});
 		}
-
-
-		function loadGround() {
-			return loadImage("img/path.PNG")
-				.then(image => {
-					const sprites = new SpriteSheet(image, 147, 113)
-					sprites.define("ground", 0, 0);
-					
-					loadLevel("level1")
-					.then(level => {
-						// console.log(level);
-						drawPath(level.backgrounds[0], context, sprites);
-					})
-				});
-		}
-
+		
 		function drawPath(background, context, sprites) {
 			background.ranges.forEach(([x1,x2,y1,y2]) => {
 				for(let x = x1; x < x2; ++x) {
@@ -86,15 +93,30 @@ const context = canvas.getContext("2d");
 				}
 			});
 		}
+
+
+		function loadGround() {
+			return loadImage("img/path.PNG")
+				.then((image) => {
+					const sprites = new SpriteSheet(image, 147, 113);
+					sprites.define("ground", 0, 0);
+					
+					loadLevel("level1")
+					.then(level => {
+						// console.log(level);
+						drawPath(level.backgrounds[0], context, sprites);
+					})
+				});
+		}
 		
 		function drawGap() {
 			return loadImage("img/gap2.png")
-			.then(image => {
+			.then((image) => {
 				
 				const sprites = new SpriteSheet(image, 147, 113);
 				sprites.define("gap", 0, 0);
 				
-					if(firstLoop == true) { 
+					if(firstLoop) { 
 						loadLevel("level1")
 						.then(level => {
 							for(let x = 0; x < 70; ++x) {
@@ -111,7 +133,7 @@ const context = canvas.getContext("2d");
 		
 		function loadFigur() {
 			return loadImage("img/superwomanavatar2.png")
-				.then(image => {
+				.then((image) => {
 					const figure = new SpriteSheet(image, 74, 74);
 					figure.define("figure", 0, 0);
 					figure.draw("figure", context, pos.x, pos.y);
@@ -146,7 +168,7 @@ const context = canvas.getContext("2d");
 					i = i / 2;
 				}
 				// Wenn Sprunghöhe erreicht ist fängt die Figur an zu fallen
-				if (i == 0 && (isFalling || isJumping)) {
+				if (i === 0 && (isFalling || isJumping)) {
 					isJumping = false;
 					isFalling = true;
 				}
@@ -207,34 +229,12 @@ const context = canvas.getContext("2d");
 			
 		}
 
-		function move(x, y) {
-			pos.x += x;
-			pos.y += y;
-			
-			if(pos.x < -30)
-			{
-				pos.x = -30;
-			}
-			if(pos.x > 730) {
-				pos.x = 730;
-			}
-			
-		}
 		var gameoverbool;
 		function stopGame() {
 			gameoverbool = true;
 			//drawGameover();
 			//cancelAnimationFrame(myReq);
 		}
-
-		const LEFTARROW = 37;
-		const RIGHTARROW = 39;
-		const SPACE = 32;
-		const input = new KeyboardState();
-		input.addMapping(LEFTARROW, keyState => { });
-		input.addMapping(RIGHTARROW, keyState => { });
-		input.addMapping(SPACE, keyState => { });
-		input.listenTo(window);
 		
 		// load and draw images
 		
