@@ -10,9 +10,9 @@ const LEFTARROW = 37;
 const RIGHTARROW = 39;
 const SPACE = 32;
 const input = new KeyboardState();
-input.addMapping(LEFTARROW, keyState => { });
-input.addMapping(RIGHTARROW, keyState => { });
-input.addMapping(SPACE, keyState => { });
+input.addMapping(LEFTARROW, (keyState)=> { });
+input.addMapping(RIGHTARROW, (keyState)=> { });
+input.addMapping(SPACE, (keyState)=> { });
 input.listenTo(window);
 
 	var pos = {
@@ -75,7 +75,7 @@ input.listenTo(window);
 							if (firstLoop) {
 								posBrick.push(level.backgrounds[0].positionBrick[x]);
 							}
-							sprites.draw("brick", context, posBrick[x], 200)
+							sprites.draw("brick", context, posBrick[x], 200);
 						}
 					});
 				});
