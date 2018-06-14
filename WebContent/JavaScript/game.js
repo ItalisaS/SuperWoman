@@ -29,7 +29,7 @@ var posBackground = {
 var firstLoop = true;
 var posPath = new Array();
 var posGap = new Array();
-var posBrick = new Array();
+var posLetter = [250,1300,3100,700,2300,3700, 1850];
 //window.setInterval(update, 9000);
 
 function stopGame() {
@@ -80,21 +80,70 @@ function drawGameover() {
 		});
 }
 
-function loadBricks() {
-	return loadImage("img/Brick.PNG")
-		.then((image) => {
-			const sprites = new SpriteSheet(image, 50, 50);
-			sprites.define("brick", 0, 0);
-			loadLevel("level1")
-				.then((level) => {
-					for (let x = 0; x < 5; ++x) {
-						if (firstLoop) {
-							posBrick.push(level.backgrounds[0].positionBrick[x]);
-						}
-						sprites.draw("brick", context, posBrick[x], 200);
-					}
-				});
-		});
+function loadC() {
+	return loadImage("img/C.png")
+	.then((image) => {
+		const sprites = new SpriteSheet(image, 50, 50);
+		sprites.define("LetterC", 0, 0);
+		sprites.draw("LetterC", context, posLetter[0], 200);
+	});
+
+}
+
+function loadA() {
+	return loadImage("img/A.png")
+	.then((image) => {
+		const sprites = new SpriteSheet(image, 50, 50);
+		sprites.define("LetterA", 0, 0);
+		sprites.draw("LetterA", context, posLetter[1], 200);
+	});
+
+}
+
+function loadT() {
+	return loadImage("img/T.png")
+	.then((image) => {
+		const sprites = new SpriteSheet(image, 50, 50);
+		sprites.define("LetterT", 0, 0);
+		sprites.draw("LetterT", context, posLetter[2], 200);
+	});
+
+}
+
+function loadI() {
+	return loadImage("img/I.png")
+	.then((image) => {
+		const sprites = new SpriteSheet(image, 50, 50);
+		sprites.define("LetterI", 0, 0);
+		sprites.draw("LetterI", context, posLetter[3], 200);
+	});
+}
+
+function loadX() {
+	return loadImage("img/X.png")
+	.then((image) => {
+		const sprites = new SpriteSheet(image, 50, 50);
+		sprites.define("LetterX", 0, 0);
+		sprites.draw("LetterX", context, posLetter[4], 200);
+	});
+}
+
+function loadS() {
+	return loadImage("img/S.png")
+	.then((image) => {
+		const sprites = new SpriteSheet(image, 50, 50);
+		sprites.define("LetterS", 0, 0);
+		sprites.draw("LetterS", context, posLetter[5], 200);
+	});
+}
+
+function loadE() {
+	return loadImage("img/E.png")
+	.then((image) => {
+		const sprites = new SpriteSheet(image, 50, 50);
+		sprites.define("LetterE", 0, 0);
+		sprites.draw("LetterE", context, posLetter[6], 200);
+	});
 }
 
 function drawPath(background, context, sprites) {
@@ -136,7 +185,7 @@ function drawGap() {
 
 			if (firstLoop) {
 				loadLevel("level1")
-					.then(level => {
+					.then((level) => {
 						for (let x = 0; x < 70; ++x) {
 							if (level.backgrounds[0].distance[x]) {
 								posGap.push(x);
@@ -214,8 +263,8 @@ function update() {
 					checkGameOver();
 					posGap[x] = posGap[x] - 0.018;
 				}
-				for (let x = 0; x < posBrick.length; ++x) {
-					posBrick[x] = posBrick[x] - 2.8;
+				for (let x = 0; x < posLetter.length; ++x) {
+					posLetter[x] = posLetter[x] - 2.8;
 				}
 			}
 			else {
@@ -238,7 +287,7 @@ function update() {
 		}
 		jump();
 		loadFigur();
-		loadBricks();
+		loadLetters();
 	}
 	myReq = requestAnimationFrame(update);
 }
@@ -247,14 +296,21 @@ function drawAll() {
 	drawGap();
 	loadcity();
 	loadGround();
-	loadBricks();
+	loadLetters();
+ }
+
+function loadLetters() {
+	loadC();
+	loadA();
+	loadT();
+	
+	loadI();
+	loadX();
+	loadS();
+	loadE();
 }
 // load and draw images
-drawGap();
-loadcity();
-setTimeout(loadGround, 200, pos.x, pos.y);
-setTimeout(loadBricks, 200, 150, 250);
-setTimeout(loadFigur, 200, pos.x, pos.y);
+drawAll();
 setTimeout(function () {
 	update();
 }, 100);
