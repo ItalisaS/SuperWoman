@@ -30,7 +30,6 @@ var firstLoop = true;
 var posPath = new Array();
 var posGap = new Array();
 var posLetter = [250,1300,3100,700,2300,3700, 1850];
-//window.setInterval(update, 9000);
 
 function stopGame() {
 	gameoverbool = true;
