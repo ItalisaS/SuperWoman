@@ -11,6 +11,36 @@ html, body {
   font-size: 50px;
   margin: 0;
 }
+
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 800px;
+}
+
+#restartButton {
+	 font-family: 'Brush Script MT';
+	 font-weight: 900;
+	background-color: #ffe8ff;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 30px;
+    position: absolute;
+  	width: 150px;
+ 	height: 92px;
+  	top: 610px;
+  	left: 1300px;
+}
+
+#canvas {
+	background-color:#3C3C3C;
+}
  
  p {
   font-family: 'Kristen';
@@ -29,6 +59,14 @@ html, body {
   height: 150px;
   line-height: 150px;
   width: 100%;
+}
+
+html, body, {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
 }
 
 
