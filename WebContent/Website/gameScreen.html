@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="ISO-8859-1">
 <link href="css/style.css" rel="stylesheet">
-<title>Level</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+<title>SuperWoman</title>
+<script type="module" src="../JavaScript/game.js">
+</script>
 </head>
+
 <body>
 	<div class="header">
 		<h1>
@@ -28,15 +30,15 @@
 					</div>
 				</li>
 				<li><a href="profile.html">Profile</a></li>
-
 				<li><a href="signUp.html">SignUp</a></li>
 			</ul>
 		</div>
 	</nav>
-	<h1 class="headline">Play Game</h1>
-
-	<a id="Play" href="gameScreen.html"> <img alt="" width="800"
-		height="588" src="img/playGame.png">
-	</a>
+	<div id ="canvas">
+		<br>
+		<canvas id="screen" width="800" height="600"></canvas>
+		<a href="gameScreen.html"><button id="restart" class="button">Restart Game</button></a>
+		<br>
+	</div>
 </body>
 </html>

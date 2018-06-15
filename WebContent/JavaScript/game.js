@@ -88,7 +88,6 @@ function loadC() {
             sprites.define("LetterC", 0, 0);
             sprites.draw("LetterC", context, posLetter[0], 200);
         });
-
 }
 
 function loadA() {
@@ -98,7 +97,6 @@ function loadA() {
             sprites.define("LetterA", 0, 0);
             sprites.draw("LetterA", context, posLetter[1], 200);
         });
-
 }
 
 function loadT() {
@@ -108,7 +106,6 @@ function loadT() {
             sprites.define("LetterT", 0, 0);
             sprites.draw("LetterT", context, posLetter[2], 200);
         });
-
 }
 
 function loadI() {
@@ -340,18 +337,18 @@ function retreiveImageFromBuffer(name) {
 
 function loadImages() {
     return Promise.all([
-        addImageToBuffer('img/city2.png', 'city2'),
-        addImageToBuffer('img/gameOver.png', 'gameOver'),
-        addImageToBuffer('img/C.png', 'C'),
-        addImageToBuffer('img/A.png', 'A'),
-        addImageToBuffer('img/T.png', 'T'),
-        addImageToBuffer('img/I.png', 'I'),
-        addImageToBuffer('img/X.png', 'X'),
-        addImageToBuffer('img/S.png', 'S'),
-        addImageToBuffer('img/E.png', 'E'),
-        addImageToBuffer('img/path.PNG', 'path'),
-        addImageToBuffer('img/gap2.png', 'gap2'),
-        addImageToBuffer('img/superwomanavatar2.png', 'superwomanavatar2'),
+        addImageToBuffer('../img/city2.png', 'city2'),
+        addImageToBuffer('../img/gameOver.png', 'gameOver'),
+        addImageToBuffer('../img/C.png', 'C'),
+        addImageToBuffer('../img/A.png', 'A'),
+        addImageToBuffer('../img/T.png', 'T'),
+        addImageToBuffer('../img/I.png', 'I'),
+        addImageToBuffer('../img/X.png', 'X'),
+        addImageToBuffer('../img/S.png', 'S'),
+        addImageToBuffer('../img/E.png', 'E'),
+        addImageToBuffer('../img/path.PNG', 'path'),
+        addImageToBuffer('../img/gap2.png', 'gap2'),
+        addImageToBuffer('../img/superwomanavatar2.png', 'superwomanavatar2'),
     ])
 }
 

@@ -42,25 +42,22 @@
 
 	<c:url value="/loginNew" var="loginUrl" />
 
-	<form action="${loginUrl}" method="post">
+	<form action="${loginUrl}" method="post" id="logIn">
 
-		<h2>Sign In</h2>
+		<h2 class="headline">Sign In</h2>
 		<%-- <c:if test="${param.error != null}">
 			<p>Invalid username and password.</p>
 		</c:if>
 		<c:if test="${param.logout != null}">
 			<p>You have been logged out.</p>
 		</c:if> --%>
-		<p>
-			<label for="username">Name</label> <br> <input type="text"
-				id="username" name="username" />
-		</p>
-		<p>
-			<label for="password">Password</label> <br> <input
-				type="password" id="password" name="password" />
-		</p>
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" /> <a href="">Forgot Password?</a> <br>
+
+		<label for="username">Name</label> <br> <input type="text"
+			id="username" name="username" /> <br> <br> <label
+			for="password">Password</label> <br> <input type="password"
+			id="password" name="password" /> <br> <br> <input
+			type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<a href="">Forgot Password?</a> <br>
 		<button type="submit" class="btn">Log in</button>
 	</form>
 
