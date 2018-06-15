@@ -33,10 +33,17 @@ var posPath = new Array();
 var posGap = new Array();
 var posLetter = [250, 1300, 3100, 700, 2300, 3700, 1850];
 
+loadImages().then(() => {
+    drawAll();
+    setTimeout(function () {
+        update();
+    }, 100);
+})
+
 function stopGame() {
     gameoverbool = true;
-    //drawGameover();
-    //cancelAnimationFrame(myReq);
+    // drawGameover();
+    // cancelAnimationFrame(myReq);
 }
 
 function move(x, y) {
@@ -337,25 +344,18 @@ function retreiveImageFromBuffer(name) {
 
 function loadImages() {
     return Promise.all([
-        addImageToBuffer('../img/city2.png', 'city2'),
-        addImageToBuffer('../img/gameOver.png', 'gameOver'),
-        addImageToBuffer('../img/C.png', 'C'),
-        addImageToBuffer('../img/A.png', 'A'),
-        addImageToBuffer('../img/T.png', 'T'),
-        addImageToBuffer('../img/I.png', 'I'),
-        addImageToBuffer('../img/X.png', 'X'),
-        addImageToBuffer('../img/S.png', 'S'),
-        addImageToBuffer('../img/E.png', 'E'),
-        addImageToBuffer('../img/path.PNG', 'path'),
-        addImageToBuffer('../img/gap2.png', 'gap2'),
-        addImageToBuffer('../img/superwomanavatar2.png', 'superwomanavatar2'),
+        addImageToBuffer("../img/city2.png", "city2"),
+        addImageToBuffer("../img/gameOver.png", "gameOver"),
+        addImageToBuffer("../img/C.png", "C"),
+        addImageToBuffer("../img/A.png", "A"),
+        addImageToBuffer("../img/T.png", "T"),
+        addImageToBuffer("../img/I.png", "I"),
+        addImageToBuffer("../img/X.png", "X"),
+        addImageToBuffer("../img/S.png", "S"),
+        addImageToBuffer("../img/E.png", "E"),
+        addImageToBuffer("../img/path.PNG", "path"),
+        addImageToBuffer("../img/gap2.png", "gap2"),
+        addImageToBuffer("../img/superwomanavatar2.png", "superwomanavatar2"),
     ])
 }
-
-loadImages().then(() => {
-    drawAll();
-    setTimeout(function () {
-        update();
-    }, 100);
-})
 
