@@ -1,12 +1,12 @@
 
 import KeyboardState from "./keyboardState.js";
-import SpriteSheet from "./spriteSheet.js";
-import { loadImage, loadLevel } from "./loaders.js";
+import SpriteSheet from "./spriteSheet.js"; 
+
+
 
 const canvas = document.getElementById("screen");
 const context = canvas.getContext("2d");
 
-var gameoverbool;
 const LEFTARROW = 37;
 const RIGHTARROW = 39;
 const SPACE = 32;
@@ -16,10 +16,23 @@ input.addMapping(RIGHTARROW, (keyState) => { });
 input.addMapping(SPACE, (keyState) => { });
 input.listenTo(window);
 
+
+
+var WIDCH = 800;
+var HEIGHT = 600;
+
+
+//Pos of View
+var posRelative = {
+	x: 40,
+	y: 399,
+};
+
 var pos = {
 	x: 40,
 	y: 399,
 };
+
 
 var posBackground = {
 	x: 0,
@@ -30,27 +43,63 @@ var firstLoop = true;
 var posPath = new Array();
 var posGap = new Array();
 var posLetter = [250,1300,3100,700,2300,3700, 1850];
+var tiles = new Map();
+var spriteName = ["city2", "gameOver", "C", "A", "T", "I", "X", "S", "E", "path", "gap2", "superwomanavatar2"];
+var spriteWidth = [800, 800, 50, 50, 50, 50, 50, 50, 50, 147, 147, 74];
+var spriteHeight = [471, 584, 50, 50, 50, 50, 50, 50, 50, 113, 113, 74];
 
-
-var imageCity2 = loadImage("img/city2.png");
-var imageGameOver = loadImage("img/gameOver.png");
-var imageC = loadImage("img/C.png");
-var imageA = loadImage("img/A.png");
-var imageT = loadImage("img/T.png");
-var imageI = loadImage("img/I.png");
-var imageX = loadImage("img/X.png");
-var imageS = loadImage("img/S.png");
-var imageE = loadImage("img/E.png");
-var imagePath = loadImage("img/path.png");
-var imageGap2 = loadImage("img/gap2.png");
-var imageSuperwomanavatar2 = loadImage("img/superwomanavatar2.png");
-
-
-function stopGame() {
-	gameoverbool = true;
-	//drawGameover();
-	//cancelAnimationFrame(myReq);
+function loadSprites(spriteId) {
+    var width = spriteWidth[spriteId];
+    var height = spriteHeight[spriteId];
+    var name = spriteName[spriteId]; 
+    var image = new Image();
+    if(spriteId == spriteName.length -1) {
+        image.onload = function(){
+                console.log("loaded: " + name); 
+                tiles.set(name, new SpriteSheet(image, width, height));
+                loadLevel();
+            };
+    } else {
+        image.onload = function(){
+            console.log("loaded: " + name); 
+            tiles.set(name, new SpriteSheet(image, width, height));
+            loadSprites(spriteId + 1)
+        };
+    }
+    //image.onerror=alert("Image not found");
+    image.src = "./img/" + name + ".png";
 }
+
+
+var level1;
+loadSprites(0);
+
+function loadLevel()
+{
+    fetch("./Level/level1.json").
+    then(function(data) {
+    data.json().then(
+        function(level) {
+            console.log("loaded level");
+            level1 = level.backgrounds[0];
+            init();
+            setTimeout(function () {
+                update();
+                }
+            , 100);
+
+        }    
+    );
+   });
+}
+
+
+
+
+
+var oldTime = Date.now();
+var newTime = Date.now();
+
 
 function move(x, y) {
 	pos.x += x;
@@ -68,159 +117,76 @@ function move(x, y) {
 function checkGameOver() {
 	for (let x = 0; x < posGap.length; ++x) {
 		if (1.6 < posGap[x] && posGap[x] < 2.6 && pos.y === 399) {
-			stopGame();
+            return true;
 		}
 	}
+    return false;
 
 }
 
-function loadcity() {
-	imageCity2
-		.then((image) => {
-			const sprites = new SpriteSheet(image, 800, 471);
-			sprites.define("city", 0, 0);
-			for (let x = 0; x < 15; ++x) {
-				sprites.draw("city", context, posBackground.x + x * sprites.width, posBackground.y);
-			}
-		});
+function loadcity() { 
+	for (let x = 0; x < 15; ++x) {
+		tiles.get("city2").draw(context, posBackground.x + x * tiles.get("city2").width, posBackground.y);
+	} 
 }
 
-function drawGameover() {
-	imageGameOver
-		.then((image) => {
-			const sprites = new SpriteSheet(image, 800, 584);
-			sprites.define("gameOver", 0, 0);
-			sprites.draw("gameOver", context, 1, 0);
-		});
+function drawGameover() { 
+	tiles.get("gameOver").draw(context, 0, 0);
 }
 
 function loadC() {
-	imageC
-	.then((image) => {
-		const sprites = new SpriteSheet(image, 50, 50);
-		sprites.define("LetterC", 0, 0);
-		sprites.draw("LetterC", context, posLetter[0], 200);
-	});
-
+	tiles.get("C").draw(context, posLetter[0], 200);
 }
 
 function loadA() {
-	imageA
-	.then((image) => {
-		const sprites = new SpriteSheet(image, 50, 50);
-		sprites.define("LetterA", 0, 0);
-		sprites.draw("LetterA", context, posLetter[1], 200);
-	});
-
+	tiles.get("A").draw(context, posLetter[1], 200);
 }
 
 function loadT() {
-	imageT
-	.then((image) => {
-		const sprites = new SpriteSheet(image, 50, 50);
-		sprites.define("LetterT", 0, 0);
-		sprites.draw("LetterT", context, posLetter[2], 200);
-	});
-
+	tiles.get("T").draw(context, posLetter[2], 200);
 }
 
 function loadI() {
-	imageI
-	.then((image) => {
-		const sprites = new SpriteSheet(image, 50, 50);
-		sprites.define("LetterI", 0, 0);
-		sprites.draw("LetterI", context, posLetter[3], 200);
-	});
+	tiles.get("I").draw(context, posLetter[3], 200);
 }
 
 function loadX() {
-	imageX
-	.then((image) => {
-		const sprites = new SpriteSheet(image, 50, 50);
-		sprites.define("LetterX", 0, 0);
-		sprites.draw("LetterX", context, posLetter[4], 200);
-	});
+	tiles.get("X").draw(context, posLetter[4], 200);
 }
 
 function loadS() {
-	imageS
-	.then((image) => {
-		const sprites = new SpriteSheet(image, 50, 50);
-		sprites.define("LetterS", 0, 0);
-		sprites.draw("LetterS", context, posLetter[5], 200);
-	});
+	tiles.get("S").draw(context, posLetter[5], 200);
 }
 
 function loadE() {
-	imageE
-	.then((image) => {
-		const sprites = new SpriteSheet(image, 50, 50);
-		sprites.define("LetterE", 0, 0);
-		sprites.draw("LetterE", context, posLetter[6], 200);
-	});
+	tiles.get("E").draw(context, posLetter[6], 200);
 }
-
-function drawPath(background, context, sprites) {
-	background.ranges.forEach(([x1, x2, y1, y2]) => {
-		for (let x = x1; x < x2; ++x) {
-			if (firstLoop) {
-				// posPath.push(x*background.distance[x]);
-				if (-(background.distance[x] - 1)) {
-					posPath.push(x);
-				}
-			}
-			sprites.drawTile(background.ground, context, posPath[x], 471);
-		}
-	});
-}
-
 
 function loadGround() {
-	imagePath
-		.then((image) => {
-			const sprites = new SpriteSheet(image, 147, 113);
-			sprites.define("ground", 0, 0);
+	for (let x = 0; x < posPath.length; ++x) {
+		tiles.get("path").draw( context, posPath[x] * tiles.get("path").width, 471);
+	}
 
-			loadLevel("level1")
-				.then((level) => {
-					// console.log(level);
-					drawPath(level.backgrounds[0], context, sprites);
-				});
-		});
+}
+ 
+function drawGap() { 
+	for (let x = 0; x < posGap.length; ++x) {
+		tiles.get("gap2").draw( context, posGap[x] * tiles.get("gap2").width, 471);
+	}
 }
 
-
-function drawGap() {
-	imageGap2
-		.then((image) => {
-
-			const sprites = new SpriteSheet(image, 147, 113);
-			sprites.define("gap", 0, 0);
-
-			if (firstLoop) {
-				loadLevel("level1")
-					.then((level) => {
-						for (let x = 0; x < 70; ++x) {
-							if (level.backgrounds[0].distance[x]) {
-								posGap.push(x);
-							}
-						}
-					});
-			}
-			for (let x = 0; x < 70; ++x) {
-				sprites.drawTile("gap", context, posGap[x], 471);
-			}
-		});
+function init() {
+    for(let x = 0; x < level1.distance.length; x++) {
+        if (level1.distance[x] == 1) {
+	    	posGap.push(x);
+        } else {
+            posPath.push(x);
+        }
+    } 
 }
-
 
 function loadFigur() {
-	imageSuperwomanavatar2
-		.then((image) => {
-			const figure = new SpriteSheet(image, 74, 74);
-			figure.define("figure", 0, 0);
-			figure.draw("figure", context, pos.x, pos.y);
-		});
+	tiles.get("superwomanavatar2").draw(context, pos.x, pos.y);
 }
 
 
@@ -256,17 +222,15 @@ function jump() {
 			isJumping = false;
 			isFalling = true;
 		}
-		drawAll();
 	}
 }
 var myReq;
 function update() {
-	if (gameoverbool) {
+	if (checkGameOver()) {
 		drawGameover();
 	}
 	else {
 		if (input.keyStates.get(RIGHTARROW)) {
-			drawAll();
 			if (pos.x > 330) {
 				posBackground.x -= 2.7;
 				firstLoop = false;
@@ -274,7 +238,6 @@ function update() {
 					posPath[x] = posPath[x] - 0.018;
 				}
 				for (let x = 0; x < posGap.length; ++x) {
-					checkGameOver();
 					posGap[x] = posGap[x] - 0.018;
 				}
 				for (let x = 0; x < posLetter.length; ++x) {
@@ -285,32 +248,33 @@ function update() {
 				move(2.7, 0);
 			}
 		} else if (input.keyStates.get(LEFTARROW)) {
-			drawAll();
-			checkGameOver();
 			move(-2.7, 0);
-		} else {
-			checkGameOver();
 		}
-
 		if (input.keyStates.get(SPACE)) {
-			drawAll();
 			if (!isJumping && !isFalling) {
 				isJumping = true;
 				i = 72;
 			}
 		}
 		jump();
-		loadFigur();
-		loadLetters();
+        newTime = Date.now();
+
+        if(newTime - oldTime >= 1000/25) {
+		    drawAll();
+            oldTime = newTime;
+        }
+
 	}
 	myReq = requestAnimationFrame(update);
 }
 
 function drawAll() {
-	drawGap();
+    console.log("draw");
 	loadcity();
 	loadGround();
+	drawGap();
 	loadLetters();
+    loadFigur();
  }
 
 function loadLetters() {
@@ -323,9 +287,5 @@ function loadLetters() {
 	loadS();
 	loadE();
 }
-// load and draw images
-drawAll();
-setTimeout(function () {
-	update();
-}, 100);
+
 
