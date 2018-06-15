@@ -31,6 +31,21 @@ var posPath = new Array();
 var posGap = new Array();
 var posLetter = [250,1300,3100,700,2300,3700, 1850];
 
+
+var imageCity2 = loadImage("img/city2.png");
+var imageGameOver = loadImage("img/gameOver.png");
+var imageC = loadImage("img/C.png");
+var imageA = loadImage("img/A.png");
+var imageT = loadImage("img/T.png");
+var imageI = loadImage("img/I.png");
+var imageX = loadImage("img/X.png");
+var imageS = loadImage("img/S.png");
+var imageE = loadImage("img/E.png");
+var imagePath = loadImage("img/path.png");
+var imageGap2 = loadImage("img/gap2.png");
+var imageSuperwomanavatar2 = loadImage("img/superwomanavatar2.png");
+
+
 function stopGame() {
 	gameoverbool = true;
 	//drawGameover();
@@ -60,7 +75,7 @@ function checkGameOver() {
 }
 
 function loadcity() {
-	return loadImage("img/city2.png")
+	imageCity2
 		.then((image) => {
 			const sprites = new SpriteSheet(image, 800, 471);
 			sprites.define("city", 0, 0);
@@ -71,7 +86,7 @@ function loadcity() {
 }
 
 function drawGameover() {
-	return loadImage("img/gameOver.png")
+	imageGameOver
 		.then((image) => {
 			const sprites = new SpriteSheet(image, 800, 584);
 			sprites.define("gameOver", 0, 0);
@@ -80,7 +95,7 @@ function drawGameover() {
 }
 
 function loadC() {
-	return loadImage("img/C.png")
+	imageC
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterC", 0, 0);
@@ -90,7 +105,7 @@ function loadC() {
 }
 
 function loadA() {
-	return loadImage("img/A.png")
+	imageA
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterA", 0, 0);
@@ -100,7 +115,7 @@ function loadA() {
 }
 
 function loadT() {
-	return loadImage("img/T.png")
+	imageT
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterT", 0, 0);
@@ -110,7 +125,7 @@ function loadT() {
 }
 
 function loadI() {
-	return loadImage("img/I.png")
+	imageI
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterI", 0, 0);
@@ -119,7 +134,7 @@ function loadI() {
 }
 
 function loadX() {
-	return loadImage("img/X.png")
+	imageX
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterX", 0, 0);
@@ -128,7 +143,7 @@ function loadX() {
 }
 
 function loadS() {
-	return loadImage("img/S.png")
+	imageS
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterS", 0, 0);
@@ -137,7 +152,7 @@ function loadS() {
 }
 
 function loadE() {
-	return loadImage("img/E.png")
+	imageE
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterE", 0, 0);
@@ -161,7 +176,7 @@ function drawPath(background, context, sprites) {
 
 
 function loadGround() {
-	return loadImage("img/path.PNG")
+	imagePath
 		.then((image) => {
 			const sprites = new SpriteSheet(image, 147, 113);
 			sprites.define("ground", 0, 0);
@@ -176,7 +191,7 @@ function loadGround() {
 
 
 function drawGap() {
-	return loadImage("img/gap2.png")
+	imageGap2
 		.then((image) => {
 
 			const sprites = new SpriteSheet(image, 147, 113);
@@ -200,7 +215,7 @@ function drawGap() {
 
 
 function loadFigur() {
-	return loadImage("img/superwomanavatar2.png")
+	imageSuperwomanavatar2
 		.then((image) => {
 			const figure = new SpriteSheet(image, 74, 74);
 			figure.define("figure", 0, 0);
