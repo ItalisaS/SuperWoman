@@ -1,171 +1,214 @@
 html, body {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0;
-  line-height: 1.5;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	line-height: 1.5;
+	overflow:auto;
 }
 
 .headline {
-  font-family: 'Kristen';
-  color:black;
-  font-weight: 900;
-  font-size: 50px;
-  margin: 0;
+	font-family: 'Kristen';
+	color: black;
+	font-weight: 900;
+	font-size: 40px;
+	text-align: center;
+}
+
+.headline2 {
+	font-family: 'Kristen';
+	color: black;
+	font-weight: 900;
+	font-size: 35px;
+	text-align: center;
 }
 
 canvas {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 800px;
+	padding-left: 0;
+	padding-right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 800px;
 }
 
+#Play {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 800px;
+}
 
-#restartButton {
-	 font-family: 'Brush Script MT';
-	 font-weight: 900;
+form, .Level {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 250px;
+}
+
+#signUp {
+	width: 800px !important;
+}
+
+#logIn {
+	width: 150px !important;
+}
+
+.button {
+	font-family: 'Brush Script MT';
+	font-weight: 900;
 	background-color: #ffe8ff;
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    display: inline-block;
-    font-size: 30px;
-    position: absolute;
-  	width: 150px;
- 	height: 92px;
-  	top: 610px;
-  	left: 1300px;
+	border: none;
+	color: black;
+	text-align: center;
+	display: inline !important;
+	margin-right:5px;
+	font-size: 30px;
+	width: 10em !impotant;
+}
+
+#restart {
+	font-family: 'Brush Script MT';
+	font-weight: 900;
+	background-color: #ffe8ff;
+	border: none;
+	color: black;
+	padding: 15px 32px;
+	text-align: center;
+	display: inline-block;
+	font-size: 30px;
+	position: absolute;
+	width: 150px;
+	height: 92px;
+	top: 610px;
+	left: 1300px;
 }
 
 #canvas {
-	background-color:#3C3C3C;
+	background-color: #3C3C3C;
 }
- 
- p {
-  font-family: 'Kristen';
-  font-weight: 100;
-  font-size: 30px;
-  margin: 0;
- }
- 
+
+p {
+	font-family: 'Kristen';
+	font-weight: 100;
+	font-size: 20px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50em;
+}
 
 .header {
-  background-image: url("../img/logo.png");
-  background-position: right;
-  background-color:	#ffe8ff ;
-  background-repeat: no-repeat;
-  background-size: 20%;
-  height: 150px;
-  line-height: 150px;
-  width: 100%;
+	background-image: url("../img/logo.png");
+	background-position: right;
+	background-color: #ffe8ff;
+	background-repeat: no-repeat;
+	background-size: 20%;
+	height: 150px;
+	line-height: 150px;
+	width: 100%;
 }
 
-html, body, {
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
+html, body {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
-
 
 .header>h1 {
-  font-family: 'Brush Script MT';
-  font-weight: 900;
-  font-size: 100px;
-  margin: 0;
-  text-align: center;
+	font-family: 'Brush Script MT';
+	font-weight: 900;
+	font-size: 100px;
+	margin: 0;
+	text-align: center;
 }
 
 nav {
-  background-color: #ffccff;
-  width: 100%;
- 
+	background-color: #ffccff;
+	width: 100%;
 }
 
 nav>.container>ul {
-  margin: 0;
-  padding: 0px;
+	margin: 0;
+	padding: 0px;
 }
 
 nav>.container>ul>li {
-  display: inline-block;
+	display: inline-block;
 }
 
 .dropdown-items {
-  cursor: default;
-  display: none;
-  position: absolute;
-  background: gray;
-  width: calc(100% - 2px);
-  list-style-type: none;
-  padding: 0;
-  top: 45px;
-  left: 0px;
-  background-color: #c404b0;
-  color: #262626;
-  opacity: 0;
-  transition: all 0.1s linear;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+	cursor: default;
+	display: none;
+	position: absolute;
+	background: gray;
+	width: calc(100% - 2px);
+	list-style-type: none;
+	padding: 0;
+	top: 45px;
+	left: 0px;
+	background-color: #c404b0;
+	color: #262626;
+	opacity: 0;
+	transition: all 0.1s linear;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 .dropdown-items li {
-  padding-top: 10px;
+	padding-top: 10px;
 }
 
 .dropdown-items a {
-  padding-left: 5px;
-  transition: padding 0.1s linear;
-  cursor: pointer;
+	padding-left: 5px;
+	transition: padding 0.1s linear;
+	cursor: pointer;
 }
 
 .dropdown-items a:hover {
-  padding-left: 8px;
+	padding-left: 8px;
 }
 
 .dropdown {
-  position: relative;
+	position: relative;
 }
 
 .dropdown:hover .dropdown-items {
-  display: inline-block;
-  opacity: 1;
+	display: inline-block;
+	opacity: 1;
 }
 
 nav>.container>ul>li>div, nav>.container>ul>li>a {
-  color: white;
-  display: inline-block;
-  text-decoration: none;
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: all 0.1s linear;
+	color: white;
+	display: inline-block;
+	text-decoration: none;
+	padding: 12px 20px;
+	cursor: pointer;
+	transition: all 0.1s linear;
 }
 
 nav>.container>ul>li>div:hover, nav>.container>ul>li>a:hover {
-  background-color: #c404b0;
-  color: #262626;
+	background-color: #c404b0;
+	color: #262626;
 }
 
 .schwierigkeiten {
-  width: 100%;
-  text-align: center;
+	width: 100%;
+	text-align: center;
 }
 
 .schwierigkeiten ul {
-  list-style-type: none;
-  display: inline;
-  padding: 0;
+	list-style-type: none;
+	display: inline;
+	padding: 0;
 }
 
 .schwierigkeiten ul li {
-  display: inline-block;
-  text-align: center;
-  padding-left: 40px;
-  padding-right: 40px;
+	display: inline-block;
+	text-align: center;
+	padding-left: 40px;
+	padding-right: 40px;
 }
 
 .schwierigkeiten span {
@@ -173,52 +216,52 @@ nav>.container>ul>li>div:hover, nav>.container>ul>li>a:hover {
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
 
 footer {
-  margin-top: 150px !important;
-  width: 100%;
-  background-color: #262626;
+	margin-top: 150px !important;
+	width: 100%;
+	background-color: #262626;
 }
 
 footer>.container>ul {
-  margin: 0;
-  padding: 0px;
+	margin: 0;
+	padding: 0px;
 }
 
 footer>.container>ul>li {
-  display: inline-block;
-  color: white;
-  padding: 60px 0px;
-  padding-right: 30px;
+	display: inline-block;
+	color: white;
+	padding: 60px 0px;
+	padding-right: 30px;
 }
 
 .container {
-  margin: 0px 10px;
+	margin: 0px 10px;
 }
 
-@media (min-width: 768px) {
-  .container {
-    margin: 0px 50px;
-  }
+@media ( min-width : 768px) {
+	.container {
+		margin: 0px 50px;
+	}
 }
 
-@media (min-width: 992px) {
-  .container {
-    margin: 0px 150px;
-  }
+@media ( min-width : 992px) {
+	.container {
+		margin: 0px 150px;
+	}
 }
 
-@media (min-width: 1200px) {
-  .container {
-    margin: 0px 200px;
-  }
+@media ( min-width : 1200px) {
+	.container {
+		margin: 0px 200px;
+	}
 }
 
-@media (min-width: 1400px) {
-  .container {
-    margin: 0px 250px;
-  }
+@media ( min-width : 1400px) {
+	.container {
+		margin: 0px 250px;
+	}
 }

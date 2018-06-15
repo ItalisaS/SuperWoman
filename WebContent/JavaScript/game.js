@@ -60,7 +60,7 @@ function checkGameOver() {
 }
 
 function loadcity() {
-	return loadImage("img/city2.png")
+	return loadImage("../img/city2.png")
 		.then((image) => {
 			const sprites = new SpriteSheet(image, 800, 471);
 			sprites.define("city", 0, 0);
@@ -71,7 +71,7 @@ function loadcity() {
 }
 
 function drawGameover() {
-	return loadImage("img/gameOver.png")
+	return loadImage("../img/gameOver.png")
 		.then((image) => {
 			const sprites = new SpriteSheet(image, 800, 584);
 			sprites.define("gameOver", 0, 0);
@@ -80,7 +80,7 @@ function drawGameover() {
 }
 
 function loadC() {
-	return loadImage("img/C.png")
+	return loadImage("../img/C.png")
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterC", 0, 0);
@@ -90,7 +90,7 @@ function loadC() {
 }
 
 function loadA() {
-	return loadImage("img/A.png")
+	return loadImage("../img/A.png")
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterA", 0, 0);
@@ -100,7 +100,7 @@ function loadA() {
 }
 
 function loadT() {
-	return loadImage("img/T.png")
+	return loadImage("../img/T.png")
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterT", 0, 0);
@@ -110,7 +110,7 @@ function loadT() {
 }
 
 function loadI() {
-	return loadImage("img/I.png")
+	return loadImage("../img/I.png")
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterI", 0, 0);
@@ -119,7 +119,7 @@ function loadI() {
 }
 
 function loadX() {
-	return loadImage("img/X.png")
+	return loadImage("../img/X.png")
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterX", 0, 0);
@@ -128,7 +128,7 @@ function loadX() {
 }
 
 function loadS() {
-	return loadImage("img/S.png")
+	return loadImage("../img/S.png")
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterS", 0, 0);
@@ -137,7 +137,7 @@ function loadS() {
 }
 
 function loadE() {
-	return loadImage("img/E.png")
+	return loadImage("../img/E.png")
 	.then((image) => {
 		const sprites = new SpriteSheet(image, 50, 50);
 		sprites.define("LetterE", 0, 0);
@@ -161,7 +161,7 @@ function drawPath(background, context, sprites) {
 
 
 function loadGround() {
-	return loadImage("img/path.PNG")
+	return loadImage("../img/path.PNG")
 		.then((image) => {
 			const sprites = new SpriteSheet(image, 147, 113);
 			sprites.define("ground", 0, 0);
@@ -176,7 +176,7 @@ function loadGround() {
 
 
 function drawGap() {
-	return loadImage("img/gap2.png")
+	return loadImage("../img/gap2.png")
 		.then((image) => {
 
 			const sprites = new SpriteSheet(image, 147, 113);
@@ -200,7 +200,7 @@ function drawGap() {
 
 
 function loadFigur() {
-	return loadImage("img/superwomanavatar2.png")
+	return loadImage("../img/superwomanavatar2.png")
 		.then((image) => {
 			const figure = new SpriteSheet(image, 74, 74);
 			figure.define("figure", 0, 0);
