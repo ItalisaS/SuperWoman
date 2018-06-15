@@ -114,9 +114,21 @@ function move(x, y) {
 
 }
 
+function checkInGap() {
+	for (let x = 0; x < posGap.length; ++x) {
+		if (pos.x + tiles.get("superwomanavatar2").width * 0.6 > posGap[x] * tiles.get("gap2").width && (posGap[x] + 1) * tiles.get("gap2").width > pos.x + tiles.get("superwomanavatar2").width *0.8 && pos.y >= 399) {
+            return true;
+		}
+	}
+    return false;
+
+}
+
+
 function checkGameOver() {
 	for (let x = 0; x < posGap.length; ++x) {
-		if (1.6 < posGap[x] && posGap[x] < 2.6 && pos.y === 399) {
+		if (pos.x + tiles.get("superwomanavatar2").width * 0.6 > posGap[x] * tiles.get("gap2").width && (posGap[x] + 1) * tiles.get("gap2").width > pos.x + tiles.get("superwomanavatar2").width *0.8 && pos.y >= canvas.height) {
+            
             return true;
 		}
 	}
@@ -192,45 +204,46 @@ function loadFigur() {
 
 var isJumping = false;
 var isFalling = false;
-var i;
+var i = 0;
 
 function jump() {
 	if (isJumping) {
 		move(0, -i * 0.07);
 		i--;
 	}
-	else if (isFalling) {
+	else {
 		move(0, i * 0.08);
-		i++;
+        i++;
 	}
 
-	if (isFalling || isJumping) {
-		// Figur stoppt am Boden
-		if (pos.y > 399) {
-			pos.y = 399;
-			isFalling = false;
-			i = 0;
-		}
-		// Figur kann nicht aus oberen Rand raus springen
-		if (pos.y < 0) {
-			isJumping = false;
-			isFalling = true;
-			i = i / 2;
-		}
-		// Wenn Sprunghöhe erreicht ist fängt die Figur an zu fallen
-		if (i === 0 && (isFalling || isJumping)) {
-			isJumping = false;
-			isFalling = true;
-		}
-	}
+    // Figur stoppt am Boden
+    if (pos.y > 399 && !checkInGap()) {
+        pos.y = 399;
+        i= 0;
+    }
+    if (pos.y >= canvas.height) {
+        pos.y = canvas.height + 10;
+        i = 0
+    }
+    
+    // Figur kann nicht aus oberen Rand raus springen
+    if (pos.y < 0) {
+        isJumping = false;
+        i = i / 2;
+    }
+    // Wenn Sprunghöhe erreicht ist fängt die Figur an zu fallen
+    if (i == 0 ) {
+        isJumping = false;
+    }
 }
 var myReq;
 function update() {
 	if (checkGameOver()) {
+        console.log("gameOver");
 		drawGameover();
 	}
 	else {
-		if (input.keyStates.get(RIGHTARROW)) {
+		if (input.keyStates.get(RIGHTARROW) && !checkInGap()) {
 			if (pos.x > 330) {
 				posBackground.x -= 2.7;
 				firstLoop = false;
@@ -247,10 +260,10 @@ function update() {
 			else {
 				move(2.7, 0);
 			}
-		} else if (input.keyStates.get(LEFTARROW)) {
+		} else if (input.keyStates.get(LEFTARROW) && !checkInGap()) {
 			move(-2.7, 0);
 		}
-		if (input.keyStates.get(SPACE)) {
+		if (input.keyStates.get(SPACE) && !checkInGap()) {
 			if (!isJumping && !isFalling) {
 				isJumping = true;
 				i = 72;
@@ -259,7 +272,7 @@ function update() {
 		jump();
         newTime = Date.now();
 
-        if(newTime - oldTime >= 1000/25) {
+        if(newTime - oldTime >= 1000/30) {
 		    drawAll();
             oldTime = newTime;
         }
@@ -269,7 +282,6 @@ function update() {
 }
 
 function drawAll() {
-    console.log("draw");
 	loadcity();
 	loadGround();
 	drawGap();
