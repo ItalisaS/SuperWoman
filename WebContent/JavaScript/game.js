@@ -212,6 +212,7 @@ function jump() {
 		i--;
 	}
 	else {
+        
 		move(0, i * 0.08);
         i++;
 	}
@@ -220,6 +221,7 @@ function jump() {
     if (pos.y > 399 && !checkInGap()) {
         pos.y = 399;
         i= 0;
+        isFalling = false;
     }
     if (pos.y >= canvas.height) {
         pos.y = canvas.height + 10;
@@ -229,11 +231,12 @@ function jump() {
     // Figur kann nicht aus oberen Rand raus springen
     if (pos.y < 0) {
         isJumping = false;
-        i = i / 2;
+        i = 0;
     }
     // Wenn Sprunghöhe erreicht ist fängt die Figur an zu fallen
-    if (i == 0 ) {
+    if (i == 0 && isJumping) {
         isJumping = false;
+        isFalling = true;
     }
 }
 var myReq;
