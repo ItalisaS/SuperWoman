@@ -34,7 +34,8 @@ var posGap = new Array();
 var posLetter = [250, 1300, 3100, 700, 2300, 3700, 1850];
 
 loadImages().then(() => {
-    drawAll();
+    //drawAll();
+    drawCatLevel();
     setTimeout(function () {
         update();
     }, 100);
@@ -87,6 +88,17 @@ function drawGameover() {
             sprites.draw("gameOver", context, 1, 0);
         });
 }
+
+
+function drawCatLevel() {
+    return retreiveImageFromBuffer("LevelCat")
+        .then((image) => {
+            const sprites = new SpriteSheet(image, 800, 584);
+            sprites.define("LevelCat", 0, 0);
+            sprites.draw("LevelCat", context, 1, 0);
+        });
+}
+
 
 function loadC() {
     return retreiveImageFromBuffer("C")
@@ -252,6 +264,7 @@ function jump() {
 }
 
 var myReq;
+var start = false;
 
 function update() {
     if (gameoverbool) {
@@ -259,6 +272,7 @@ function update() {
     }
     else {
         if (input.keyStates.get(RIGHTARROW)) {
+            start = true;
             drawAll();
             if (pos.x > 330) {
                 posBackground.x -= 2.7;
@@ -278,6 +292,7 @@ function update() {
                 move(2.7, 0);
             }
         } else if (input.keyStates.get(LEFTARROW)) {
+            start = true;
             drawAll();
             checkGameOver();
             move(-2.7, 0);
@@ -286,15 +301,18 @@ function update() {
         }
 
         if (input.keyStates.get(SPACE)) {
+            start = true;
             drawAll();
             if (!isJumping && !isFalling) {
                 isJumping = true;
                 i = 72;
             }
         }
-        jump();
-        loadFigur();
-        loadLetters();
+        if(start == true){
+            jump();
+            loadFigur();
+            loadLetters();
+        }        
     }
     myReq = requestAnimationFrame(update);
 }
@@ -356,6 +374,7 @@ function loadImages() {
         addImageToBuffer("../img/path.PNG", "path"),
         addImageToBuffer("../img/gap2.png", "gap2"),
         addImageToBuffer("../img/superwomanavatar2.png", "superwomanavatar2"),
+        addImageToBuffer("../img/Cat.png", "LevelCat")
     ])
 }
 
