@@ -1,6 +1,6 @@
 import KeyboardState from "./keyboardState.js";
 import SpriteSheet from "./spriteSheet.js";
-import {loadImage, loadLevel} from "./loaders.js";
+import { loadImage, loadLevel } from "./loaders.js";
 import ImageBuffer from './imageBuffer.js';
 
 const canvas = document.getElementById("screen");
@@ -13,9 +13,9 @@ const LEFTARROW = 37;
 const RIGHTARROW = 39;
 const SPACE = 32;
 const input = new KeyboardState();
-input.addMapping(LEFTARROW, (keyState) => {});
-input.addMapping(RIGHTARROW, (keyState) => {});
-input.addMapping(SPACE, (keyState) => {});
+input.addMapping(LEFTARROW, (keyState) => { });
+input.addMapping(RIGHTARROW, (keyState) => { });
+input.addMapping(SPACE, (keyState) => { });
 input.listenTo(window);
 
 var pos = {
@@ -27,6 +27,16 @@ var posBackground = {
     x: 0,
     y: 0,
 };
+
+var avatar = {
+    width: 74,
+    height: 74,
+}
+
+var gap = {
+    width: 147,
+    height: 113,
+}
 
 var firstLoop = true;
 var posPath = new Array();
@@ -60,13 +70,22 @@ function move(x, y) {
 
 }
 
-function checkGameOver() {
+function checkInGap() {
     for (let x = 0; x < posGap.length; ++x) {
-        if (1.6 < posGap[x] && posGap[x] < 2.6 && pos.y === 399) {
-            stopGame();
+        if (pos.x + avatar.width * 0.6 > posGap[x] * gap.width && (posGap[x] + 1) * gap.width > pos.x + avatar.width * 0.8 && pos.y >= 399) {
+            return true;
         }
     }
+    return false;
+}
 
+
+function checkGameOver() {
+    for (let x = 0; x < posGap.length; ++x) {
+        if (pos.x + avatar.width * 0.6 > posGap[x] * gap.width && (posGap[x] + 1) * gap.width > pos.x + avatar.width * 0.8 && pos.y >= canvas.height) {
+            return true;
+        }
+    }
 }
 
 function loadcity() {
@@ -229,7 +248,7 @@ function loadFigur() {
 
 var isJumping = false;
 var isFalling = false;
-var i;
+var i = 0;
 
 function jump() {
     if (isJumping) {
@@ -267,11 +286,14 @@ var myReq;
 var start = false;
 
 function update() {
-    if (gameoverbool) {
+    if (checkInGap()) {
         drawGameover();
     }
+    // if (gameoverbool) {
+    //      drawGameover();
+    //}
     else {
-        if (input.keyStates.get(RIGHTARROW)) {
+        if (input.keyStates.get(RIGHTARROW) && !checkInGap()) {
             start = true;
             drawAll();
             if (pos.x > 330) {
@@ -281,7 +303,6 @@ function update() {
                     posPath[x] = posPath[x] - 0.018;
                 }
                 for (let x = 0; x < posGap.length; ++x) {
-                    checkGameOver();
                     posGap[x] = posGap[x] - 0.018;
                 }
                 for (let x = 0; x < posLetter.length; ++x) {
@@ -291,16 +312,13 @@ function update() {
             else {
                 move(2.7, 0);
             }
-        } else if (input.keyStates.get(LEFTARROW)) {
+        } else if (input.keyStates.get(LEFTARROW) && !checkInGap()) {
             start = true;
             drawAll();
-            checkGameOver();
             move(-2.7, 0);
-        } else {
-            checkGameOver();
         }
 
-        if (input.keyStates.get(SPACE)) {
+        if (input.keyStates.get(SPACE) && !checkInGap()) {
             start = true;
             drawAll();
             if (!isJumping && !isFalling) {
@@ -308,11 +326,11 @@ function update() {
                 i = 72;
             }
         }
-        if(start == true){
+        if (start == true && !checkInGap()) {
             jump();
             loadFigur();
             loadLetters();
-        }        
+        }
     }
     myReq = requestAnimationFrame(update);
 }
@@ -339,10 +357,10 @@ function addImageToBuffer(url, name) {
     return new Promise((resolve => {
         loadImage(url)
             .then(
-                (image) => {
-                    imageBuffer[name] = image;
-                    resolve();
-                }
+            (image) => {
+                imageBuffer[name] = image;
+                resolve();
+            }
             )
             .catch(() => {
                 reject();
