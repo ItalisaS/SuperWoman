@@ -9,6 +9,9 @@ const context = canvas.getContext("2d");
 const imageBuffer = ImageBuffer.getInstance();
 
 var gameoverbool;
+var cLoaded = true;
+var seachedText = "CAT";
+
 const LEFTARROW = 37;
 const RIGHTARROW = 39;
 const SPACE = 32;
@@ -38,24 +41,26 @@ var gap = {
     height: 113,
 }
 
+var block = {
+    width: 50,
+    height: 50,
+}
+
+var text = "";
 var firstLoop = true;
 var posPath = new Array();
 var posGap = new Array();
 var posLetter = [250, 1300, 3100, 700, 2300, 3700, 1850];
+var drawLetter = [true, true, true, true, true, true, true];
+var letter = ["C", "A", "T", "I", "X", "S", "E"];
 
 loadImages().then(() => {
-    //drawAll();
     drawCatLevel();
     setTimeout(function () {
         update();
     }, 100);
 })
 
-function stopGame() {
-    gameoverbool = true;
-    // drawGameover();
-    // cancelAnimationFrame(myReq);
-}
 
 function move(x, y) {
     pos.x += x;
@@ -69,6 +74,55 @@ function move(x, y) {
     }
 
 }
+
+
+function checkBlock() {
+
+    for (let x = 0; x < posGap.length; ++x) {
+        if (drawLetter[x] == true) {
+            if (pos.y < (200 + block.height) && pos.y > 200 && (pos.x + avatar.width) > posLetter[x] && pos.x < (posLetter[x] + block.width)) {
+                drawLetter[x] = false;
+                text = text + letter[x];
+            }
+        }
+    }
+}
+
+
+// Text an (x,y) ausgeben
+// size: Schriftgröße
+// text: Text
+// align: Bezug für (x,y), zwei Buchstaben, z.B. lu für links unten, s. case
+// diretion: Textrichtung: v für vertikal, sonst horizontal
+canvas.text = function (x, y, size, color, text, align, direction) {
+    var align_h = "m";
+    var align_v = "m";
+    if (align && align.length) {
+        align_h = align.substr(0, 1);
+        if (align.length > 1) align_v = align.substr(1, 1);
+    }
+    context.save();
+    context.translate(x, this.h - y);
+    if (direction && direction == "v")
+        context.rotate(1.5 * Math.PI);
+    switch (align_h) {
+        case "l": context.textAlign = "start"; break;
+        case "m": context.textAlign = "center"; break;
+        case "r": context.textAlign = "end"; break;
+        default: context.textAlign = "center"; break;
+    }
+    switch (align_v) {
+        case "o": context.textBaseline = "top"; break;
+        case "m": context.textBaseline = "middle"; break;
+        case "u": context.textBaseline = "bottom"; break;
+        default: context.textBaseline = "middle"; break;
+    }
+    context.font = size + " sans-serif";
+    context.fillStyle = color;
+    context.fillText(text, x, y);
+    context.restore();
+} 
+
 
 function checkInGap() {
     for (let x = 0; x < posGap.length; ++x) {
@@ -88,6 +142,7 @@ function checkGameOver() {
     }
 }
 
+
 function loadcity() {
     return retreiveImageFromBuffer("city2")
         .then((image) => {
@@ -105,6 +160,16 @@ function drawGameover() {
             const sprites = new SpriteSheet(image, 800, 584);
             sprites.define("gameOver", 0, 0);
             sprites.draw("gameOver", context, 1, 0);
+        });
+}
+
+
+function drawYouWin() {
+    return retreiveImageFromBuffer("win")
+        .then((image) => {
+            const sprites = new SpriteSheet(image, 800, 584);
+            sprites.define("win", 0, 0);
+            sprites.draw("win", context, 1, 0);
         });
 }
 
@@ -205,12 +270,10 @@ function loadGround() {
 
             loadLevel("level1")
                 .then((level) => {
-                    // console.log(level);
                     drawPath(level.backgrounds[0], context, sprites);
                 });
         });
 }
-
 
 function drawGap() {
     return retreiveImageFromBuffer("gap2")
@@ -286,14 +349,18 @@ var myReq;
 var start = false;
 
 function update() {
+    if(text == seachedText)
+    {
+        drawYouWin();
+    }
     if (checkInGap()) {
         drawGameover();
     }
-    // if (gameoverbool) {
-    //      drawGameover();
-    //}
+    if (checkBlock()) {
+        drawGameover();
+    }
     else {
-        if (input.keyStates.get(RIGHTARROW) && !checkInGap()) {
+        if (input.keyStates.get(RIGHTARROW) && !checkInGap() && !(text == seachedText)) {
             start = true;
             drawAll();
             if (pos.x > 330) {
@@ -312,13 +379,13 @@ function update() {
             else {
                 move(2.7, 0);
             }
-        } else if (input.keyStates.get(LEFTARROW) && !checkInGap()) {
+        } else if (input.keyStates.get(LEFTARROW) && !checkInGap() && !(text == seachedText)) {
             start = true;
             drawAll();
             move(-2.7, 0);
         }
 
-        if (input.keyStates.get(SPACE) && !checkInGap()) {
+        if (input.keyStates.get(SPACE) && !checkInGap() && !(text == seachedText)) {
             start = true;
             drawAll();
             if (!isJumping && !isFalling) {
@@ -326,7 +393,7 @@ function update() {
                 i = 72;
             }
         }
-        if (start == true && !checkInGap()) {
+        if (start == true && !checkInGap() && !(text == seachedText)) {
             jump();
             loadFigur();
             loadLetters();
@@ -342,15 +409,36 @@ function drawAll() {
     loadLetters();
 }
 
-function loadLetters() {
-    loadC();
-    loadA();
-    loadT();
 
-    loadI();
-    loadX();
-    loadS();
-    loadE();
+function loadLetters() {
+    canvas.text(400, 50, "35px", "white", text, "mm", "h");
+
+    if (drawLetter[0] == true) {
+        loadC();
+    }
+    if (drawLetter[1] == true) {
+        loadA();
+    }
+
+    if (drawLetter[2] == true) {
+        loadT();
+    }
+
+    if (drawLetter[3] == true) {
+        loadI();
+    }
+
+    if (drawLetter[4] == true) {
+        loadX();
+    }
+
+    if (drawLetter[5] == true) {
+        loadS();
+    }
+
+    if (drawLetter[6] == true) {
+        loadE();
+    }
 }
 
 function addImageToBuffer(url, name) {
@@ -382,6 +470,7 @@ function loadImages() {
     return Promise.all([
         addImageToBuffer("../img/city2.png", "city2"),
         addImageToBuffer("../img/gameOver.png", "gameOver"),
+        addImageToBuffer("../img/win.png", "win"),
         addImageToBuffer("../img/C.png", "C"),
         addImageToBuffer("../img/A.png", "A"),
         addImageToBuffer("../img/T.png", "T"),
