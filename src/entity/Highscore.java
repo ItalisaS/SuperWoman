@@ -1,5 +1,8 @@
-package dbConnection;
+package entity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Highscore {
 
 	private User user;

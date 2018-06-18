@@ -1,5 +1,7 @@
 package dbConnection;
 
+import entity.User;
+
 public interface UserDao {
 
 	public void createUser(User user);

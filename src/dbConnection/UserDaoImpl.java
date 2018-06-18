@@ -1,41 +1,43 @@
 package dbConnection;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-public class UserDaoImpl implements UserDao{
+import entity.User;
+
+public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	private DataSource dataSource;
+	@Autowired
+	DataSource dataSource;
 	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource=dataSource;
+	@PostConstruct
+	public void initialize() {
+		setDataSource(dataSource);
 	}
 	
 	@Override
 	public void createUser(User user) {
 		
-		jdbcTemplate = new JdbcTemplate(dataSource);
-		
-		String sql = "INSERT INTO USER " + 
+		String sql = "INSERT INTO user " + 
 				"(username, email, password, education) VALUES (?,?,?,?)";
 		
-		jdbcTemplate.update(sql, new Object[] {user.getUsername(),user.getEmail(), user.getPassword(), user.getEducation()});
+		getJdbcTemplate().update(sql, new Object[] {user.getUsername(),user.getEmail(), user.getPassword(), user.getEducation()});
 		
 	}
 
 	@Override
 	public void deleteUser(User user) {
 		
-		jdbcTemplate = new JdbcTemplate(dataSource);
-		
 		String sql = "DELETE FROM user WHERE username=?";
 		
-		jdbcTemplate.update(sql, new Object[] {user.getUsername()});
+		getJdbcTemplate().update(sql, new Object[] {user.getUsername()});
 	}
 
 
