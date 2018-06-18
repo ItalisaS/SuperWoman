@@ -7,6 +7,13 @@
 <title>SuperWoman</title>
 <script type="module" src="../JavaScript/game.js">
 </script>
+<script type="text/javascript">
+	function showHint() {
+		document.getElementById('hint').innerHTML ="The searched word is the name of an animal species.";
+		document.getElementById('hint').style.display = 'inline';
+		document.getElementById('showHintButton').style.display = 'none';
+	}
+</script>
 </head>
 
 <body>
@@ -35,10 +42,12 @@
 		</div>
 	</nav>
 	<div id ="canvas">
+		<input type="button" value="Show Hint" id="showHintButton" onclick="showHint()"/>
 		<br>
 		<canvas id="screen" width="800" height="600"></canvas>
 		<a href="gameScreen.html"><button id="restart" class="button">Restart Game</button></a>
 		<br>
+		<div id="hint">Test</div>
 	</div>
 </body>
 </html>
