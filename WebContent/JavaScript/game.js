@@ -314,6 +314,7 @@ var isFalling = false;
 var i = 0;
 
 function jump() {
+	loadSearchWord();
     if (isJumping) {
         move(0, -i * 0.07);
         i--;
@@ -347,6 +348,50 @@ function jump() {
 
 var myReq;
 var start = false;
+
+function drawAll() {
+    drawGap();
+    loadcity();
+    loadGround();
+    loadLetters();
+    setTimeout(function () {
+        loadSearchWord();
+    }, 100);
+}
+
+
+function loadLetters() {
+    if (drawLetter[0] == true) {
+        loadC();
+    }
+    if (drawLetter[1] == true) {
+        loadA();
+    }
+
+    if (drawLetter[2] == true) {
+        loadT();
+    }
+
+    if (drawLetter[3] == true) {
+        loadI();
+    }
+
+    if (drawLetter[4] == true) {
+        loadX();
+    }
+
+    if (drawLetter[5] == true) {
+        loadS();
+    }
+
+    if (drawLetter[6] == true) {
+        loadE();
+    }
+}
+
+function loadSearchWord() {
+	canvas.text(400, 50, "35px", "white", text, "mm", "h");
+}
 
 function update() {
     if(text == seachedText)
@@ -397,48 +442,10 @@ function update() {
             jump();
             loadFigur();
             loadLetters();
+            loadSearchWord();
         }
     }
     myReq = requestAnimationFrame(update);
-}
-
-function drawAll() {
-    drawGap();
-    loadcity();
-    loadGround();
-    loadLetters();
-}
-
-
-function loadLetters() {
-    canvas.text(400, 50, "35px", "white", text, "mm", "h");
-
-    if (drawLetter[0] == true) {
-        loadC();
-    }
-    if (drawLetter[1] == true) {
-        loadA();
-    }
-
-    if (drawLetter[2] == true) {
-        loadT();
-    }
-
-    if (drawLetter[3] == true) {
-        loadI();
-    }
-
-    if (drawLetter[4] == true) {
-        loadX();
-    }
-
-    if (drawLetter[5] == true) {
-        loadS();
-    }
-
-    if (drawLetter[6] == true) {
-        loadE();
-    }
 }
 
 function addImageToBuffer(url, name) {
@@ -484,4 +491,5 @@ function loadImages() {
         addImageToBuffer("../img/Cat.png", "LevelCat")
     ])
 }
+
 
