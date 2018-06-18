@@ -354,9 +354,7 @@ function drawAll() {
     loadcity();
     loadGround();
     loadLetters();
-    setTimeout(function () {
-        loadSearchWord();
-    }, 100);
+    loadSearchWord();
 }
 
 
