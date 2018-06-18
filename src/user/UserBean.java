@@ -50,7 +50,7 @@ public class UserBean {
 
 	public void setEducation(String education) {
 		this.education = education;
-//		createUser();
+		createUser();
 	}
 	
 	public void createUser() {
